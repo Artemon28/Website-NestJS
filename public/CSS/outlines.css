@@ -1,0 +1,286 @@
+.tickets-seller{
+    margin: 0;
+}
+
+@font-face {
+    font-family: "F1";
+    src: url("content/F1Font.otf") format("opentype");
+}
+
+body {
+    font-size: 17px;
+    line-height: 23px;
+    background: #fff;
+}
+
+header {
+    color: white;
+    background-color: #E10600;
+}
+
+
+@media (min-width: 930px){
+    .flex-header{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 65px;
+        margin: auto;
+        padding: 15px;
+    }
+
+    .flex-logo {
+        display: flex;
+        height: 100%;
+    }
+
+    .nav-href {
+        line-height: 1.3em;
+        position: relative;
+        padding: 0 14px;
+        margin: 5px;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+    .nav-href {
+        transition: 0.4s ease-in-out;
+    }
+    .nav-href, a:link, a:visited {
+        box-shadow: inset 0 -1px 0 #40382D;
+    }
+
+    .nav-href, a:focus, a:hover {
+        box-shadow: inset 0 -60px 0 #40382D, 2px 2px 3px rgba(0, 0, 0, 0.3);
+        color: #DECDA5;
+    }
+
+    .flex-navigation {
+        display: flex;
+        height: 30px;
+    }
+
+    .small-flex-header{
+        display: none;
+    }
+}
+
+.activeLink{
+    transition: 0s;
+    color: black;
+}
+
+@media (max-width: 930px){
+    .flex-header{
+        display: none;
+    }
+
+    .small-flex-header{
+        height: 65px;
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        padding: 15px;
+    }
+
+    .flex-logo{
+        display: flex;
+        height: 100%;
+    }
+
+    .nav-menu{
+        display: flex;
+        height: 100%;
+    }
+
+    .video-wraper{
+        display: none;
+    }
+    .video-wrapper video{
+        display: none;
+    }
+}
+
+
+main{
+}
+
+*, :before, :after {
+    box-sizing: border-box;
+}
+@media (min-width: 900px){
+    .video-wrapper{
+        position: relative;
+        height: 500px;
+        top: 0;
+        overflow: hidden;
+    }
+
+    .video-wrapper video{
+        width: 100%;
+        position: absolute;
+        top:50%;
+        transform:translate(0,-50%);
+
+    }
+}
+
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.information-block {
+    padding-top: 6vw;
+    padding-bottom: 6vw;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.blovk-relative {
+    position: relative;
+    max-width: 70em;
+    width: 100%;
+}
+@media (min-width: 50em) {
+    .img-class{
+        padding-left: 2.5rem;
+        padding-right: 0;
+    }
+}
+
+.img-class{
+    max-width: 55em;
+    height: auto;
+    width: 100%;
+}
+
+@media (min-width: 50em) {
+    .text-card {
+        left: 0;
+        right: auto;
+        max-width: 50em;
+        position: absolute;
+        bottom: 2em;
+        background-color: rgba(248, 248, 248, 0.95);
+        filter: drop-shadow(0 3px 6px rgba(0,0,0,.16));
+        padding: 1.5rem 1.5rem 2rem 1.5rem;
+    }
+}
+.text-card {
+    max-width: 40em;
+    width: 100%;
+    background-color: rgba(248, 248, 248, 0.95);
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,.16));
+    padding: 1.5rem 1.5rem 2rem 1.5rem;
+}
+
+.Racing-table{
+    margin: 1em;
+    display: grid;
+    border-collapse: collapse;
+    border: 1px solid grey;
+    overflow-y: auto;
+    grid-template-columns:
+    minmax(150px, 1fr)
+    minmax(150px, 2fr)
+    minmax(220px, 2fr)
+    minmax(220px, 2fr);
+}
+
+thead, tbody, tr {
+    display: contents;
+}
+
+th, td {
+    text-align: center;
+    padding: 0.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+th {
+    top: 0;
+    background: #E10600;
+    font-weight: normal;
+    font-size: 1.1rem;
+    color: white;
+}
+
+
+tr:nth-child(even) td {
+    background: rgba(225, 6, 0, 0.03);
+}
+
+.photo-gallery{
+    padding: 1em;
+}
+
+.flex-gallery{
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 1em;
+    max-height: 550px;
+    background-color: rgba(225, 6, 0, 0.03);
+}
+
+.flex-gallery-photo{
+    padding: 0.5em;
+    display: inline-block;
+    height: 100%;
+    flex-basis: 250px;
+    width: 25%;
+    max-width: 100%;
+}
+
+.ticket{
+    margin: 1em;
+    padding: 0.5em;
+    display: inline-block;
+    flex-basis: 250px;
+    width: 25%;
+    max-width: 100%;
+    border-style: solid;
+    border-width: 2px;
+}
+
+#wrap {
+    flex: 1 0 auto;
+}
+
+html, body{
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    flex-shrink: 0;
+    font-size: 0.9em;
+    padding: 10px 30px;
+    color: white;
+    background-color: #15151e;
+}
+
+#SpeedTest{
+
+}
+

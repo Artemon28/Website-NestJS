@@ -1,0 +1,55 @@
+#log{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    max-width: 200px;
+}
+
+#gif{
+    height: 100px;
+    text-align: center;
+}
+
+.userCardDiv{
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+}
+
+.errorMessageDiv{
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+}
+
+h4{
+    margin: 5px;
+}
+
+p{
+    margin: 5px;
+    margin-left: 10px;
+}
+
+#client_header{
+    margin: 5px;
+}
+
+#client_header p{
+    margin-left: 0px;
+}
+
+
+.loading-gallery{
+    margin: 10px;
+}
+
+.loading-flex-gallery{
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
