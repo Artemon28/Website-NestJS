@@ -7,6 +7,7 @@
     <link href="../CSS/loading.css" rel="stylesheet">
     <script src="../JS/testJS.js"></script>
     <script src="../JS/promises.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="../content/F1-logo.ico" />
     <meta charset="UTF-8">
     <meta name="keywords" content="Ф1,Билеты,Сочи,Гран-при">
@@ -14,20 +15,43 @@
 <body class="tickets-seller">
     <div id="wrap">
         <header>
-            <div class="flex-header">
-                <img class="flex-logo" alt="лого гп России 2022" src="/content/GPlogo.png">
-                <nav class="flex-navigation">
-                    <a class="nav-href" href="..">О нас</a>
-                    <a class="nav-href" href="tickets.html">Билеты</a>
-                    <a class="nav-href" href="account.html">Личный кабинет</a>
-                    <a class="nav-href" href="shoppingBag.html">Корзина</a>
-                </nav>
-                <img class="flex-logo" alt="лого Sochi" src="/content/sochi.png">
-            </div>
+            <script src="../JS/handlebars.js"></script>
+            <div id="header-block"></div>
+
+            <script id="header-template" type="text/x-handlebars-template">
+                <div class="flex-header">
+                    <img class="flex-logo" alt="лого гп России 2022" src="../content/GPlogo.png">
+                    <nav class="flex-navigation">
+                        {{#each links}}
+                            <a class="nav-href" href="{{link}}">{{linkText}}</a>
+                        {{/each}}
+                    </nav>
+                    {{#if username}}
+                        <div class="authorization-div">
+                            <p>Logged in as {{username}}</p>
+                            <button class="authorization-button">
+                                Log Out
+                            </button>
+                        </div>
+                    {{else}}
+                        <div class="authorization-div">
+                            <form onsubmit="return false">
+                                <input type="text" class="authorization-form" placeholder="Username" autocomplete="off" required>
+                            </form>
+                            <form onsubmit="return false">
+                                <input type="password" class="authorization-form" placeholder="Password" autocomplete="off" required>
+                            </form>
+                            <button class="authorization-button">
+                                Login
+                            </button>
+                        </div>
+                    {{/if}}
+                </div>
+            </script>
             <div class="small-flex-header">
-                <a href=""><img class="nav-menu" src="/content/menu2.png"></a> <!--тут надо сделать всплывающее меню, пока не знаю как и не успеваю-->
+                <a href=""><img class="nav-menu" src="../content/menu2.png"></a> <!--тут надо сделать всплывающее меню, пока не знаю как и не успеваю-->
                 <a href="https://sochiautodrom.ru/?_ga=2.213806032.512656409.1635086261-1029469700.1631815872">
-                    <img class="flex-logo" alt="лого Sochi" src="/content/sochi.png"></a>
+                    <img class="flex-logo" alt="лого Sochi" src="../content/sochi.png"></a>
             </div>
         </header>
         <main>

@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tables{
+    id        Int     @default(autoincrement()) @id
+    users     User[]
+    tribunes  Tribune[]
+}
+
+model User{
+    id        Int     @default(autoincrement()) @id
+    email     String  @unique
+    name      String?
+    ticket    Ticket?
+    table     Tables? @relation(fields: [tableid], references: [id])
+    tableid   Int?
+}
+
+model Ticket{
+    id        Int     @default(autoincrement()) @id
+    seat      Seat?
+    cost      Int
+    user      User?  @relation(fields: [userid], references: [id])
+    userid    Int?
+}
+
+model Seat{
+    rowNumber   Int  @unique
+    seatNumber  Int  @unique
+    ticket      Ticket?  @relation(fields: [ticketid], references: [id])
+    ticketid    Int?
+}
+
+model Tribune{
+    id        Int     @default(autoincrement()) @id
+    sectors   Sector[]
+    table     Tables? @relation(fields: [tableid], references: [id])
+    tableid   Int?
+}
+
+model Sector{
+    id        Int      @default(autoincrement()) @id
+    seats     Rows[]
+    tribune   Tribune? @relation(fields: [tribuneid], references: [id])
+    tribuneid Int?
+}
+
+model Rows{
+    id        Int     @default(autoincrement()) @id
+    row       Int[]
+    sector    Sector? @relation(fields: [sectorid], references: [id])
+    sectorid  Int?
+}

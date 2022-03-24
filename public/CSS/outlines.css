@@ -280,7 +280,18 @@ footer {
     background-color: #15151e;
 }
 
-#SpeedTest{
-
+.authorization-form{
+    width: 100px;
+    height: 30px;
+    margin: 5px;
 }
 
+.authorization-button{
+    margin: 5px;
+    height: 30px;
+}
+
+.authorization-div{
+    display: flex;
+    align-items: center;
+}
