@@ -49,6 +49,8 @@ model Row{
 
 model Seat{
      seatNumber  Int  @unique
+     ticket      Ticket? @relation(fields: [ticketid], references: [id])
+     ticketid    Int?
      row         Row?  @relation(fields: [rowid], references: [id])
      rowid       Int?
  }
