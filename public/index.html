@@ -3,87 +3,142 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title>F1 tickets Sochi gp</title>
-    <link href="/CSS/outlines.css" rel="stylesheet">
-    <script src="/JS/testJS.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="/content/F1-logo.ico" />
+    <link href="CSS/outlines.css" rel="stylesheet">
+    <script src="JS/testJS.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="content/F1-logo.ico" />
     <meta charset="UTF-8">
     <meta name="keywords" content="Ф1,Билеты,Сочи,Гран-при">
 </head>
 <body class="tickets-seller">
-    <div id="wrap">
-        <header>
+<div id="wrap">
+    <header>
+        <div id="header-block"></div>
+        <script id="header-template" type="text/x-handlebars-template">
             <div class="flex-header">
-                <img class="flex-logo" alt="лого гп России 2022" src="/content/GPlogo.png">
+                <img class="flex-logo" alt="лого гп России 2022" src="content/GPlogo.png">
                 <nav class="flex-navigation">
-                    <a class="nav-href" href=".">О нас</a>
-                    <a class="nav-href" href="web/tickets.html">Билеты</a>
-                    <a class="nav-href" href="web/account.html">Личный кабинет</a>
-                    <a class="nav-href" href="web/shoppingBag.html">Корзина</a>
+                    {{#each links}}
+                        <a class="nav-href" href="{{link}}">{{linkText}}</a>
+                    {{/each}}
                 </nav>
-                <img class="flex-logo" alt="лого Sochi" src="/content/sochi.png">
+                {{#if username}}
+                    <div class="authorization-div">
+                        <p>Logged in as {{username}}</p>
+                        <button class="authorization-button">
+                            Log Out
+                        </button>
+                    </div>
+                {{else}}
+                    <div class="authorization-div">
+                        <form onsubmit="return false">
+                            <input type="text" class="authorization-form" placeholder="Username" autocomplete="off" required>
+                        </form>
+                        <form onsubmit="return false">
+                            <input type="password" class="authorization-form" placeholder="Password" autocomplete="off" required>
+                        </form>
+                        <button class="authorization-button">
+                            Login
+                        </button>
+                    </div>
+                {{/if}}
             </div>
-            <div class="small-flex-header">
-                <a href=""><img class="nav-menu" src="/content/menu2.png"></a> <!--тут надо сделать всплывающее меню, пока не знаю как и не успеваю-->
-                <a href="https://sochiautodrom.ru/?_ga=2.213806032.512656409.1635086261-1029469700.1631815872">
-                    <img class="flex-logo" alt="лого Sochi" src="/content/sochi.png"></a>
-            </div>
-        </header>
-        <main>
-            <div class="video-wrapper">
-                <video class="video" autoplay loop>
-                    <source src="/content/GPad.mp4">
-                </video>
-            </div>
+        </script>
 
-            <div class="information-block">
-                <div class="flex-center">
-                    <div class="blovk-relative">
-                        <img alt="мемная картинка" src="/content/mafia.jpg" width="587" height="289" class="img-class">
-                        <div class="text-card">
-                            <h1>Что это за сайт?</h1>
-                            <p>На этом сайте будет интернет магазин - продажа билетов на российский этап <strong>формулы 1 в Сочи</strong></p>
-                            <p>Будем наблюдать за развитием борьбы в кубке конструкторов в следующем сезоне после нововведений в регламент, сможет ли
-                                <i>Mercedec</i> оставить за собой лидерство и поднимется ли <i>Ferrari</i> до уровня топ команд</p>
-                            <p>Надеюсь сделать его красивее, чем официальный и опробовать в нём много нового</p>
+        <script type="text/javascript">
+            var headerBlock = document.getElementById("header-template").innerHTML;
+
+            var template = Handlebars.compile(headerBlock);
+
+            var quoteData = template({
+                links: [
+                    {
+                        link: '.',
+                        linkText: 'О нас'
+                    },
+                    {
+                        link: 'web/tickets.html',
+                        linkText: 'Билеты'
+                    },
+                    {
+                        link: 'web/account.html',
+                        linkText: 'Личный кабинет'
+                    },
+                    {
+                        link: 'web/shoppingBag.html',
+                        linkText: 'Корзина'
+                    }
+                ]
+            });
+
+            document.getElementById("header-block").innerHTML += quoteData;
+        </script>
+
+        <div class="small-flex-header">
+            <a href=""><img class="nav-menu" src="content/menu2.png"></a> <!--тут надо сделать всплывающее меню, пока не знаю как и не успеваю-->
+            <a href="https://sochiautodrom.ru/?_ga=2.213806032.512656409.1635086261-1029469700.1631815872">
+                <img class="flex-logo" alt="лого Sochi" src="content/sochi.png"></a>
+        </div>
+    </header>
+    <main>
+        <div class="video-wrapper">
+            <video class="video" autoplay loop>
+                <source src="content/GPad.mp4">
+            </video>
+        </div>
+
+        <div id="info-blocks"></div>
+
+        <script id="block-template" type="text/x-handlebars-template">
+            {{#each blocks}}
+                <div class="information-bloks">
+                    <div class="information-block">
+                        <div class="flex-center">
+                            <div class="blovk-relative">
+                                <img src="{{src}}" width="587" height="289" class="img-class">
+                                <div class="text-card">
+                                    <h1>{{head}}</h1>
+                                    <p>{{text}}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {{/each}}
+        </script>
 
-            <div class="information-block">
-                <div class="flex-center">
-                    <div class="blovk-relative">
-                        <img alt="мемная картинка" src="/content/f1crash.jpg" width="2560" height="1440" class="img-class">
-                        <div class="text-card">
-                            <h1>Формула 1</h1>
-                            <p>Формула 1 – это высшая категория в автоспорте для машин с открытыми колесами. В ней сильнейшие пилоты
-                                ведут борьбу под пристальным вниманием миллионов болельщиков по всей планете.</p>
-                            <p>Спортивный уикенд Формулы 1 состоит из трех тренировочных сессий, квалификации и гонки, в которой
-                                определится победитель Гран-при России. После финиша гонки тройка призеров и представитель победившей
-                                команды поднимутся на подиум для церемонии награждения.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <script type="text/javascript">
+            var blocksInfo = document.getElementById("block-template").innerHTML;
 
-            <div class="information-block">
-                <div class="flex-center">
-                    <div class="blovk-relative">
-                        <img alt="мемная картинка" src="/content/HAMRUS.jpeg" width="1920" height="1080" class="img-class">
-                        <div class="text-card">
-                            <h1>О Сочи Автодроме</h1>
-                            <p>Сочи Автодром – единственный в России автодром, принимающий гонки Формулы 1.
-                                Он был спроектирован компанией Tilke Gmbh & Co. KG. и официально открыт в Олимпийском парке Сочи 20
-                                сентября 2014 года. С 9 по 12 октября 2014 года на нем прошел первый в истории Гран-при России
-                                Формулы 1.Длина трассы Сочи Автодрома составляет 5848 метров. Она пролегает среди объектов, принимавших
-                                Зимние Олимпийские игры 2014. Всего на треке 18 поворотов: 12 правых и 6 левых. В конфигурации трассы
-                                обращает на себя внимание затяжной третий поворот — 750-метровый левый вираж с постоянным радиусом.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            var template = Handlebars.compile(blocksInfo);
+
+            var quoteData = template({
+                blocks: [
+                    {
+                        src: 'content/mafia.jpg',
+                        head: 'Что это за сайт?',
+                        text: 'На этом сайте будет интернет магазин - продажа билетов на отмененный российский этап формулы 1 в Сочи. Будем наблюдать за развитием борьбы в кубке конструкторов в этом сезоне после нововведений в регламент, не сможет ли Mercedec оставить за собой лидерство и поднимется ли Ferrari до WCС'
+                    },
+                    {
+                        src: 'content/f1crash.jpg',
+                        head: 'Формула 1',
+                        text: 'Формула 1 – это высшая категория в автоспорте для машин с открытыми колесами. В ней сильнейшие пилоты ведут борьбу под пристальным вниманием миллионов болельщиков по всей планете. Спортивный уикенд Формулы 1 состоит из трех тренировочных сессий, квалификации и гонки, в которой определится победитель Гран-при России. После финиша гонки тройка призеров и представитель победившей команды поднимутся на подиум для церемонии награждения.'
+                    },
+                    {
+                        src: 'content/HAMRUS.jpeg',
+                        head: 'О Сочи    Автодроме',
+                        text: 'Сочи Автодром – единственный в России автодром, принимающий гонки Формулы 1. Он был спроектирован компанией Tilke Gmbh & Co. KG. и официально открыт в Олимпийском парке Сочи 20 сентября 2014 года. С 9 по 12 октября 2014 года на нем прошел первый в истории Гран-при России Формулы 1.Длина трассы Сочи Автодрома составляет 5848 метров. Она пролегает среди объектов, принимавших Зимние Олимпийские игры 2014. Всего на треке 18 поворотов: 12 правых и 6 левых. В конфигурации трассы обращает на себя внимание затяжной третий поворот — 750-метровый левый вираж с постоянным радиусом.'
+                    }
+                ]
+            });
+
+            document.getElementById("info-blocks").innerHTML += quoteData;
+        </script>
 
 
+        <div id="races-table"></div>
+
+        <script id="race-table" type="text/x-handlebars-template">
             <table class="Racing-table">
                 <thead><tr>
                     <th>Страна</th>
@@ -92,35 +147,79 @@
                     <th>Дата окончания уикенда</th>
                 </tr></thead>
                 <tbody>
-                <tr><td>США</td><td>Остин</td><td>22.10.2021</td><td>24.10.2021</td></tr>
-                <tr><td>Мексика</td><td>Мехико</td><td>05.11.2021</td><td>07.11.2021</td></tr>
-                <tr><td>Бразилия</td><td>Сан-Паулу</td><td>12.11.2021</td><td>14.11.2021</td></tr>
-                <tr><td>Катар</td><td>Лусаил</td><td>19.11.2021</td><td>21.11.2021</td></tr>
-                <tr><td>Саудовская Аравия</td><td>Джидда</td><td>03.12.2021</td><td>05.12.2021</td></tr>
-                <tr><td>Абу-Даби</td><td>Абу-Даби</td><td>10.12.2021</td><td>12.12.2021</td></tr>
+                {{#each race}}
+                    <tr><td>{{country}}</td><td>{{city}}</td><td>{{first_day}}</td><td>{{race_day}}</td></tr>
+                {{/each}}
                 </tbody>
             </table>
+        </script>
 
-            <div class="photo-gallery">
-                <div class="flex-gallery">
-                    <img class="flex-gallery-photo" src="/content/gallery1.jpg">
-                    <img class="flex-gallery-photo" src="/content/gallery2.jpg">
-                    <img class="flex-gallery-photo" src="/content/gallery3.jpg">
-                    <img class="flex-gallery-photo" src="/content/gallery4.jpg">
-                    <img class="flex-gallery-photo" src="/content/gallery5.jpg">
-                    <img class="flex-gallery-photo" src="/content/gallery7.jpg">
-                    <img class="flex-gallery-photo" src="/content/gallery8.jpg">
-                </div>
+        <script type="text/javascript">
+            var raceInfo = document.getElementById("race-table").innerHTML;
+
+            var template = Handlebars.compile(raceInfo);
+
+            var raceData = template({
+                race: [
+                    {
+                        country: 'Saudi Arabian',
+                        city: 'Jeddah',
+                        first_day: '25.03.2022',
+                        race_day: '27.03.2022'
+                    },
+                    {
+                        country: 'Australia',
+                        city: 'Melbourne',
+                        first_day: '08.04.2022',
+                        race_day: '10.04.2022'
+                    },
+                    {
+                        country: 'Italy',
+                        city: 'Emilia Romagna',
+                        first_day: '22.04.2022',
+                        race_day: '24.04.2022'
+                    },
+                    {
+                        country: 'USA',
+                        city: 'Miami',
+                        first_day: '06.05.2022',
+                        race_day: '08.05.2022'
+                    },
+                    {
+                        country: 'Spain',
+                        city: 'Barcelona',
+                        first_day: '20.05.2022',
+                        race_day: '22.05.2022'
+                    },
+                ]
+            });
+
+            document.getElementById("races-table").innerHTML += raceData;
+        </script>
+
+        <div class="photo-gallery">
+            <div class="flex-gallery">
+                <img class="flex-gallery-photo" src="content/gallery1.jpg">
+                <img class="flex-gallery-photo" src="content/gallery2.jpg">
+                <img class="flex-gallery-photo" src="content/gallery3.jpg">
+                <img class="flex-gallery-photo" src="content/gallery4.jpg">
+                <img class="flex-gallery-photo" src="content/gallery5.jpg">
+                <img class="flex-gallery-photo" src="content/gallery7.jpg">
+                <img class="flex-gallery-photo" src="content/gallery8.jpg">
             </div>
+        </div>
 
 
-        </main>
-    </div>
+    </main>
+</div>
 
-    <footer>
-        Данный сайт создаётся в учебных целях, он не является настоящей продажей билетов на ф1. Автор сайта считает
-        российский сайт продажи билетов грустным, хочет улучшить его и сделать в стиле сайта F1 Tickets
-        <p id="SpeedTest">Page load time is </p>
-    </footer>
+<footer>
+    Данный сайт создаётся в учебных целях, он не является настоящей продажей билетов на ф1. Автор сайта считает
+    российский сайт продажи билетов грустным, хочет улучшить его и сделать в стиле сайта F1 Tickets
+    <p id="SpeedTest">Page load time is </p>
+    <script>
+        LoggingInterceptor().intercept();
+    </script>
+</footer>
 </body>
 </html>
