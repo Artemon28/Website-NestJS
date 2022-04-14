@@ -1,18 +1,16 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { LoggingInterceptor } from "./logging.interceptor";
+import { TicketModule } from './ticket/ticket.module';
+import { TribuneModule } from './tribune/tribune.module';
+import { UserModule } from "./user/user.module";
+import { SectorModule } from './sector/sector.module';
+import { SeatModule } from './seat/seat.module';
+import { RowModule } from './row/row.module';
 
 @Module({
-  imports: [],
+  imports: [TicketModule, TribuneModule, UserModule, SectorModule, SeatModule, RowModule],
   controllers: [AppController],
-  providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: LoggingInterceptor,
-    },
-    AppService
-  ],
+  providers: [AppService],
 })
 export class AppModule {}
