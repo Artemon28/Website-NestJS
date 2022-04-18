@@ -8,12 +8,14 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model User{
     id        Int     @default(autoincrement()) @id
     email     String  @unique
     name      String?
+    password  String
     tickets    Ticket[]
 }
 
@@ -28,8 +30,9 @@ model Ticket{
 }
 
 model Tribune{
-    id        Int     @default(autoincrement()) @id
-    sectors   Sector[]
+    id           Int     @default(autoincrement()) @id
+    sectors      Sector[]
+    description  String
 }
 
 model Sector{
