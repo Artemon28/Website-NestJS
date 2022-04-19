@@ -12,7 +12,6 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
 
-
   const config = new DocumentBuilder()
     .setTitle('Cats example')
     .setDescription('The cats API description')
@@ -23,7 +22,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   const PORT = process.env.PORT || 3000;
-  // const PORT = 3000;
-  await app.listen(3000);
+  await app.listen(PORT);
 }
 bootstrap();

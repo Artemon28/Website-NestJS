@@ -14,6 +14,7 @@ model User{
     id        Int     @default(autoincrement()) @id
     email     String  @unique
     name      String?
+    password  String
     tickets    Ticket[]
 }
 
@@ -28,8 +29,9 @@ model Ticket{
 }
 
 model Tribune{
-    id        Int     @default(autoincrement()) @id
-    sectors   Sector[]
+    id           Int     @default(autoincrement()) @id
+    sectors      Sector[]
+    description  String
 }
 
 model Sector{
@@ -53,4 +55,5 @@ model Seat{
      ticketid    Int?
      row         Row?  @relation(fields: [rowid], references: [id])
      rowid       Int?
+     isAvailable Boolean @default(true)
  }

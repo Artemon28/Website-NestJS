@@ -9,4 +9,12 @@ export class SeatService {
   public create(dto: CreateSeatDto): Promise<Seat> {
     throw new NotImplementedException();
   }
+
+  public reserve(): Promise<Seat> {
+    throw new NotImplementedException();
+  }
+
+  public isFree(): boolean {
+    throw new NotImplementedException();
+  }
 }

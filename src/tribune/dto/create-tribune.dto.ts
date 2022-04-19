@@ -1,5 +1,5 @@
 import { Sector } from '@prisma/client'
-export class CreateTicketDto {
+export class CreateTribuneDto {
   readonly id: number
   readonly sectors: Sector[]
 }

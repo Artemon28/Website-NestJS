@@ -5,7 +5,7 @@ import { CreateTicketDto } from "./dto/create-ticket.dto";
 @Injectable()
 export class TicketService {
 
-  public buyTicket(dto: CreateTicketDto): Promise<Ticket>{
+  public create(dto: CreateTicketDto): Promise<Ticket>{
     throw new NotImplementedException();
   }
 

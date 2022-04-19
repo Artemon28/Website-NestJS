@@ -3,4 +3,5 @@ export class CreateSeatDto {
   readonly id: number
   readonly ticketId: number
   readonly rowId: number
+  readonly isAvailable: boolean
 }

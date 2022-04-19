@@ -11,8 +11,8 @@ export class TicketController {
   ) {}
 
   @Post()
-  public buyTicket(dto: CreateTicketDto): Promise<Ticket>{
-    return this.ticketService.buyTicket(dto);
+  public createTicket(dto: CreateTicketDto): Promise<Ticket>{
+    return this.ticketService.create(dto);
   }
 
   @Get()

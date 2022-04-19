@@ -1,5 +1,5 @@
-import { Controller, Post } from "@nestjs/common";
-import { Row } from "@prisma/client";
+import { Controller, Get, Post } from "@nestjs/common";
+import { Row, Seat } from "@prisma/client";
 import { RowService } from "./row.service";
 import { CreateRowDto } from "./dto/create-row.dto";
 
@@ -13,4 +13,10 @@ export class RowController {
   public create(dto: CreateRowDto): Promise<Row>{
     return this.rowService.create(dto);
   }
+
+  @Get()
+  public getSeat(id: number): Promise<Seat> {
+    return this.rowService.getSeat(id);
+  }
+
 }

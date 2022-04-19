@@ -12,6 +12,7 @@ export class UserFactory {
         data: {
           id: createUserDto.id,
           email: createUserDto.email,
+          password: createUserDto.password,
         },
       });
     } else {
@@ -20,6 +21,7 @@ export class UserFactory {
           id: createUserDto.id,
           name: createUserDto.name,
           email: createUserDto.email,
+          password: createUserDto.password,
         },
       });
     }
@@ -44,7 +46,12 @@ export class UserService {
     throw new NotImplementedException();
   }
 
-  public buyTicket(id: number, ticket: Ticket): Promise<User> {
+  //здесь мы создадим билет, отправим в него все нужные нам данные, он зарезервирует место
+  public buyTicket(tribuneId: number, sectorId: number, rowId: number, seatId: number): Promise<Ticket> {
+    throw new NotImplementedException();
+  }
+
+  public removeTicket(ticketId: number): Promise<Ticket> {
     throw new NotImplementedException();
   }
 

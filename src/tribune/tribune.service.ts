@@ -1,17 +1,25 @@
 import { Injectable, NotImplementedException } from "@nestjs/common";
-import { CreateUserDto } from "../user/dto/create-user.dto";
-import { User } from "@prisma/client";
-import { UserFactory } from "../user/user.service";
+import { Sector, Tribune } from "@prisma/client";
+import { CreateTribuneDto } from "./dto/create-tribune.dto";
 
 @Injectable()
 export class TribuneService {
   constructor() {
   }
-  public create(dto: CreateUserDto): Promise<User> {
+
+  public create(dto: CreateTribuneDto): Promise<Tribune> {
     throw new NotImplementedException();
   }
 
-  public getUserName(id: number): string {
+  public addSector(sector: Sector): Promise<Tribune> {
+    throw new NotImplementedException();
+  }
+
+  public getSector(id: number): Promise<Sector> {
+    throw new NotImplementedException();
+  }
+
+  public getInfo(): string {
     throw new NotImplementedException();
   }
 }

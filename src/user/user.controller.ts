@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, NotImplementedException, Post, Put } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Tribune } from "@prisma/client";
 import { User } from '@prisma/client'
 import { Ticket } from '@prisma/client'
 import { UserService } from "./user.service";
@@ -60,9 +60,15 @@ export class UserController {
     status: 201,
     description: 'Ticket had been bought successfully'
   })
+
   @Put()
-  public buyTicket(id: number, ticket: Ticket): Promise<User>{
-    return this.userService.buyTicket(id, ticket);
+  public buyTicket(tribuneId: number, sectorId: number, rowId: number, seatId: number): Promise<Ticket> {
+    return this.userService.buyTicket(tribuneId, sectorId, rowId, seatId);
+  }
+
+  @Put()
+  public removeTicket(ticketId: number): Promise<Ticket> {
+    return this.userService.removeTicket(ticketId);
   }
 
   @Delete()
