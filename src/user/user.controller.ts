@@ -1,13 +1,11 @@
-import { Body, Controller, Delete, Get, NotImplementedException, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { PrismaClient, Tribune } from "@prisma/client";
 import { User } from '@prisma/client'
-import { Ticket } from '@prisma/client'
+import { Ticket, Tribune } from '@prisma/client'
 import { UserService } from "./user.service";
-import { ApiOperation, ApiParam, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 
-const prisma = new PrismaClient()
-
+@ApiTags('user and ticket')
 @Controller('/user')
 export class UserController {
   constructor(
@@ -26,7 +24,6 @@ export class UserController {
     return this.userService.create(creatUserDto);
   }
 
-
   @ApiOperation({
     summary: 'Get name of user'
   })
@@ -34,43 +31,46 @@ export class UserController {
     status: 403,
     description: 'Forbidden.'
   })
-  @Get()
-  public getUserName(id: number): string{
+  @Get(':id')
+  public getUserName(@Param('id') id: number): string{
     return this.userService.getUserName(id);
   }
 
   @ApiOperation({
     summary: 'Add name of user'
   })
-  @ApiParam({ name: 'username', type: 'string' })
   @ApiResponse({
     status: 201,
     description: 'Name had been added successfully'
   })
-  @Put()
-  public addUserName(id: number, name: string): Promise<User> {
-    return this.userService.addUserName(id, name);
+  @Put(':name')
+  public addUserName(@Param('name') name: string): Promise<User> {
+    return this.userService.addUserName(name);
   }
 
   @ApiOperation({
     summary: 'User buying ticket'
   })
-  @ApiParam({ name: 'id', type: 'number' })
   @ApiResponse({
     status: 201,
     description: 'Ticket had been bought successfully'
   })
-
   @Put()
   public buyTicket(tribuneId: number, sectorId: number, rowId: number, seatId: number): Promise<Ticket> {
     return this.userService.buyTicket(tribuneId, sectorId, rowId, seatId);
   }
 
+  @ApiOperation({
+    summary: 'Remove ticket from user'
+  })
   @Put()
   public removeTicket(ticketId: number): Promise<Ticket> {
     return this.userService.removeTicket(ticketId);
   }
 
+  @ApiOperation({
+    summary: 'Delete this user'
+  })
   @Delete()
   public removeUser(id: number): Promise<User>{
     return this.userService.removeUser(id);

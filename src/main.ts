@@ -13,10 +13,11 @@ async function bootstrap() {
   app.setViewEngine('hbs');
 
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('CTicket seller')
+    .setDescription('Attributes for selling tickets')
     .setVersion('1.0')
-    .addTag('cats')
+    .addTag('processing of seats')
+    .addTag('user and ticket')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

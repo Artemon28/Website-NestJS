@@ -7,7 +7,4 @@ import { TribuneService } from "./tribune.service";
     controllers: [TribuneController],
     providers: [TribuneService]
 })
-export class tribuneModule{}
-
-export class TribuneModule {
-}
+export class TribuneModule {}

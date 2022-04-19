@@ -42,7 +42,7 @@ export class UserService {
     throw new NotImplementedException();
   }
 
-  public addUserName(id: number, name: string): Promise<User> {
+  public addUserName(name: string): Promise<User> {
     throw new NotImplementedException();
   }
 

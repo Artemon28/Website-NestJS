@@ -9,11 +9,11 @@ export class TicketService {
     throw new NotImplementedException();
   }
 
-  public getSeat(id: number): Promise<Seat>{
+  public getSeat(): Promise<Seat>{
     throw new NotImplementedException();
   }
 
-  public removeTicket(id: number): Promise<Ticket>{
+  public removeTicket(): Promise<Ticket>{
     throw new NotImplementedException();
   }
 }

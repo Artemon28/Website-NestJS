@@ -1,21 +1,29 @@
-import { Controller, Get, Post } from "@nestjs/common";
+import { Controller, Get, Param, Post } from "@nestjs/common";
 import { Row, Seat } from "@prisma/client";
 import { RowService } from "./row.service";
 import { CreateRowDto } from "./dto/create-row.dto";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
+@ApiTags('processing of seats')
 @Controller('row')
 export class RowController {
   constructor(
     private readonly rowService: RowService,
   ) {}
 
+  @ApiOperation({
+    summary: 'Create row'
+  })
   @Post()
   public create(dto: CreateRowDto): Promise<Row>{
     return this.rowService.create(dto);
   }
 
-  @Get()
-  public getSeat(id: number): Promise<Seat> {
+  @ApiOperation({
+    summary: 'Return seat object'
+  })
+  @Get(':id')
+  public getSeat(@Param('id') id: number): Promise<Seat> {
     return this.rowService.getSeat(id);
   }
 
