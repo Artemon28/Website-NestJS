@@ -1,6 +1,7 @@
-import { Injectable, NotImplementedException } from "@nestjs/common";
+import { Injectable, NotImplementedException, Param, Patch } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { PrismaClient, Ticket, User } from "@prisma/client";
+import { PrismaClient, Ticket, User, Prisma } from "@prisma/client";
+import { PrismaService } from "../prisma.service";
 
 
 @Injectable()
@@ -30,24 +31,35 @@ export class UserFactory {
 
 @Injectable()
 export class UserService {
-  constructor() {
-  }
+
+  constructor(private prisma: PrismaService) {}
 
   public create(dto: CreateUserDto): Promise<User> {
     const userFactory = new UserFactory();
     return userFactory.createFromCreateUserDto(dto);
   }
 
-  public getUserName(id: number): string {
-    throw new NotImplementedException();
+  public getUser(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+  ): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: userWhereUniqueInput,
+    });
   }
 
-  public addUserName(name: string): Promise<User> {
-    throw new NotImplementedException();
+  async addUserName(params: {
+    where: Prisma.UserWhereUniqueInput;
+    data: Prisma.UserUpdateInput;
+  }): Promise<User> {
+    const { where, data } = params;
+    return this.prisma.user.update({
+      data,
+      where,
+    });
   }
 
   //здесь мы создадим билет, отправим в него все нужные нам данные, он зарезервирует место
-  public buyTicket(tribuneId: number, sectorId: number, rowId: number, seatId: number): Promise<Ticket> {
+  public buyTicket(tribuneId: number, sectorId: number, rowId: number, seatId: number): Promise<User> {
     throw new NotImplementedException();
   }
 
@@ -55,7 +67,11 @@ export class UserService {
     throw new NotImplementedException();
   }
 
-  public removeUser(id: number): Promise<User> {
-    throw new NotImplementedException();
+  public removeUser(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+  ): Promise<User | null> {
+    return this.prisma.user.delete({
+      where: userWhereUniqueInput,
+    });
   }
 }

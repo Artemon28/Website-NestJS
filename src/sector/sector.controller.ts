@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { Row, Sector } from "@prisma/client";
+import { Row, Seat, Sector } from "@prisma/client";
 import { SectorService } from "./sector.service";
 import { CreateSectorDto } from "./dto/create-sector.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { CreateSeatDto } from "../seat/dto/create-seat.dto";
 
 @ApiTags('processing of seats')
 @Controller('sector')
@@ -20,10 +21,10 @@ export class SectorController {
   }
 
   @ApiOperation({
-    summary: 'get Row object by id'
+    summary: 'get Sector'
   })
   @Get(':id')
-  public getRow(@Param('id') id: number): Promise<Row> {
-    return this.sectorService.getRow(id);
+  public getSector(@Param('id') id: string): Promise<Sector> {
+    return this.sectorService.getSector({ id: Number(id) });
   }
 }

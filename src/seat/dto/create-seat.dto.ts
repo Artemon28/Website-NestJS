@@ -4,8 +4,6 @@ export class CreateSeatDto {
   @ApiProperty()
   readonly seatNumber: number
   @ApiProperty()
-  readonly id: number
-  @ApiProperty()
   readonly ticketId: number
   @ApiProperty()
   readonly rowId: number

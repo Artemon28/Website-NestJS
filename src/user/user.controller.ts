@@ -3,7 +3,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from '@prisma/client'
 import { Ticket, Tribune } from '@prisma/client'
 import { UserService } from "./user.service";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('user and ticket')
 @Controller('/user')
@@ -15,10 +15,6 @@ export class UserController {
   @ApiOperation({
     summary: 'Create user'
   })
-  @ApiResponse({
-    status: 201,
-    description: 'The user have been successfully created.'
-  })
   @Post()
   public createUser(@Body() creatUserDto: CreateUserDto): Promise<User> {
     return this.userService.create(creatUserDto);
@@ -27,38 +23,29 @@ export class UserController {
   @ApiOperation({
     summary: 'Get name of user'
   })
-  @ApiResponse({
-    status: 403,
-    description: 'Forbidden.'
-  })
   @Get(':id')
-  public getUserName(@Param('id') id: number): string{
-    return this.userService.getUserName(id);
+  public getUser(@Param('id') id: string): Promise<User> {
+    return this.userService.getUser( { id: Number(id) });
   }
 
   @ApiOperation({
     summary: 'Add name of user'
   })
-  @ApiResponse({
-    status: 201,
-    description: 'Name had been added successfully'
-  })
-  @Put(':name')
-  public addUserName(@Param('name') name: string): Promise<User> {
-    return this.userService.addUserName(name);
+  @Put(':id/:name')
+  public addUserName(@Param('id') id: string, @Param('name') name: string): Promise<User> {
+    return this.userService.addUserName({
+      where: { id: Number(id) },
+      data: { name: name },
+    });
   }
 
-  @ApiOperation({
-    summary: 'User buying ticket'
-  })
-  @ApiResponse({
-    status: 201,
-    description: 'Ticket had been bought successfully'
-  })
-  @Put()
-  public buyTicket(tribuneId: number, sectorId: number, rowId: number, seatId: number): Promise<Ticket> {
-    return this.userService.buyTicket(tribuneId, sectorId, rowId, seatId);
-  }
+  // @ApiOperation({
+  //   summary: 'User buying ticket'
+  // })
+  // @Put()
+  // public buyTicket(tribuneId: number, sectorId: number, rowId: number, seatId: number): Promise<Ticket> {
+  //   return this.userService.buyTicket(tribuneId, sectorId, rowId, seatId);
+  // }
 
   @ApiOperation({
     summary: 'Remove ticket from user'
@@ -71,8 +58,8 @@ export class UserController {
   @ApiOperation({
     summary: 'Delete this user'
   })
-  @Delete()
-  public removeUser(id: number): Promise<User>{
-    return this.userService.removeUser(id);
+  @Delete(':id')
+  public removeUser(@Param('id') id: string): Promise<User>{
+    return this.userService.removeUser({ id: Number(id) });
   }
 }

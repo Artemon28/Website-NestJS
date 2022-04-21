@@ -5,4 +5,6 @@ export class CreateTribuneDto {
   readonly id: number
   @ApiProperty()
   readonly sectors: Sector[]
+  @ApiProperty()
+  readonly description: string
 }

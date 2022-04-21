@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { Seat, Ticket } from "@prisma/client";
 import { TicketService } from "./ticket.service";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
@@ -11,28 +11,27 @@ export class TicketController {
     private readonly ticketService: TicketService,
   ) {}
 
-  @ApiOperation({
-    summary: 'Create ticket'
-  })
-  @Post()
-  public createTicket(dto: CreateTicketDto): Promise<Ticket>{
-    return this.ticketService.create(dto);
-  }
+  // @ApiOperation({
+  //   summary: 'Create ticket'
+  // })
+  // @Post()
+  // public createTicket(@Body() creatTicketDto: CreateTicketDto, seatNumber: string): Promise<Ticket>{
+  //   return this.ticketService.create(creatTicketDto, { id: Number(seatNumber) });
+  // }
 
   @ApiOperation({
-    summary: 'Return Seat var'
+    summary: 'Return Seat'
   })
-  @Get()
-  public getSeat(): Promise<Seat>{
-    return this.ticketService.getSeat();
+  @Get(':id')
+  public getTicket(@Param('id') id: string): Promise<Ticket>{
+    return this.ticketService.getTicket({ id: Number(id) });
   }
 
   @ApiOperation({
     summary: 'Delete this ticket'
   })
-  @Delete()
-  public removeTicket(): Promise<Ticket>{
-    return this.ticketService.removeTicket();
+  @Delete(':id')
+  public removeTicket(@Param('id') id: string): Promise<Ticket>{
+    return this.ticketService.removeTicket({ id: Number(id) });
   }
-
 }
