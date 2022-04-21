@@ -1,7 +1,8 @@
-import { Injectable, NotImplementedException } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Prisma, PrismaClient, Ticket } from "@prisma/client";
 import { CreateTicketDto } from "./dto/create-ticket.dto";
 import { PrismaService } from "../prisma.service";
+
 
 
 @Injectable()
@@ -22,6 +23,7 @@ export class TicketFactory {
 
 @Injectable()
 export class TicketService {
+
   constructor(private prisma: PrismaService) {}
 
   // public create(
