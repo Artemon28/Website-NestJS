@@ -1,20 +1,10 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Post,
-  Body,
-  Put,
-  Delete,
-  Render,
-} from '@nestjs/common';
+import { Get, Controller, Render } from '@nestjs/common';
 
 @Controller()
 export class AppController {
-
   @Get()
   @Render('index') // <= Название вашего представления
   getIndexPage() {
-    return { user: 'Hello world!' }; // Модель представления
+    return { message: 'Hello world!' }; // Модель представления
   }
 }
