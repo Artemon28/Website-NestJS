@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common"
 import { Seat } from "@prisma/client";
 import { SeatService } from "./seat.service";
 import { CreateSeatDto } from "./dto/create-seat.dto";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('Seat')
 @Controller('seat')
@@ -14,7 +14,18 @@ export class SeatController {
   @ApiOperation({
     summary: 'Create seat'
   })
-  @Post()
+  @ApiResponse({
+    status: 201,
+    description: 'The seat have been successfully created.'
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
+  })
   @Post()
   public create(@Body() creatSeatDto: CreateSeatDto): Promise<Seat>{
     return this.seatService.create(creatSeatDto);
@@ -22,6 +33,18 @@ export class SeatController {
 
   @ApiOperation({
     summary: 'Reserve this seat'
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'the seat was successfully reserved'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'no seat with this id number'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
   })
   @Put(':seatNumber')
   public reserveSeat(@Param('seatNumber') seatNumber: string): Promise<Seat>{
@@ -34,6 +57,18 @@ export class SeatController {
   @ApiOperation({
     summary: 'Un Reserve seat'
   })
+  @ApiResponse({
+    status: 200,
+    description: 'the seat was successfully unreserved'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'no seat with this id number'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
+  })
   @Put(':seatNumber')
   public unReserveSeat(@Param('seatNumber') seatNumber: string): Promise<Seat>{
     return this.seatService.reserve({
@@ -45,6 +80,18 @@ export class SeatController {
   @ApiOperation({
     summary: 'get seat'
   })
+  @ApiResponse({
+    status: 200,
+    description: 'seat information received successfully'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'no seat with this number.'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
+  })
   @Get(':seatNumber')
   public getSeat(@Param('seatNumber') seatNumber: string): Promise<Seat> {
     return this.seatService.getSeat( { seatNumber: Number(seatNumber)});
@@ -52,6 +99,18 @@ export class SeatController {
 
   @ApiOperation({
     summary: 'Delete seat'
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'seat successfully removed'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'no seat with this id number'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
   })
   @Delete(':seatNumber')
   public removeSeat(@Param('seatNumber') seatNumber: string): Promise<Seat>{
