@@ -4,7 +4,7 @@ import { RowService } from "./row.service";
 import { CreateRowDto } from "./dto/create-row.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
-@ApiTags('processing of seats')
+@ApiTags('Row')
 @Controller('row')
 export class RowController {
   constructor(

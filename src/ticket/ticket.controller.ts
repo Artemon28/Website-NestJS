@@ -4,7 +4,7 @@ import { TicketService } from "./ticket.service";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { CreateTicketDto } from "./dto/create-ticket.dto";
 
-@ApiTags('user and ticket')
+@ApiTags('Ticket')
 @Controller('ticket')
 export class TicketController {
   constructor(

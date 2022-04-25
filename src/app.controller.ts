@@ -17,5 +17,4 @@ export class AppController {
   getIndexPage() {
     return { user: 'Hello world!' }; // Модель представления
   }
-
 }

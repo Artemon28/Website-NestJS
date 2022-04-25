@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Post, Put } from "@nestjs/common";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiDefaultResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { Sector, Tribune } from "@prisma/client";
 import { TribuneService } from "./tribune.service";
 import { CreateTribuneDto } from "./dto/create-tribune.dto";
 
-@ApiTags('processing of seats')
-@Controller('tribune')
+@ApiTags('Tribune')
+@Controller('/tribune')
 export class TribuneController {
   constructor(
     private readonly tribuneService: TribuneService,

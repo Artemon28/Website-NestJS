@@ -4,7 +4,7 @@ import { SectorService } from "./sector.service";
 import { CreateSectorDto } from "./dto/create-sector.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
-@ApiTags('processing of seats')
+@ApiTags('Sector')
 @Controller('sector')
 export class SectorController {
   constructor(

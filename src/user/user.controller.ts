@@ -5,7 +5,7 @@ import { Ticket, Tribune } from '@prisma/client'
 import { UserService } from "./user.service";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 
-@ApiTags('user and ticket')
+@ApiTags('User')
 @Controller('/user')
 export class UserController {
   constructor(

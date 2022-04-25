@@ -154,49 +154,6 @@
             </table>
         </script>
 
-        <script type="text/javascript">
-            var raceInfo = document.getElementById("race-table").innerHTML;
-
-            var template = Handlebars.compile(raceInfo);
-
-            var raceData = template({
-                race: [
-                    {
-                        country: 'Saudi Arabian',
-                        city: 'Jeddah',
-                        first_day: '25.03.2022',
-                        race_day: '27.03.2022'
-                    },
-                    {
-                        country: 'Australia',
-                        city: 'Melbourne',
-                        first_day: '08.04.2022',
-                        race_day: '10.04.2022'
-                    },
-                    {
-                        country: 'Italy',
-                        city: 'Emilia Romagna',
-                        first_day: '22.04.2022',
-                        race_day: '24.04.2022'
-                    },
-                    {
-                        country: 'USA',
-                        city: 'Miami',
-                        first_day: '06.05.2022',
-                        race_day: '08.05.2022'
-                    },
-                    {
-                        country: 'Spain',
-                        city: 'Barcelona',
-                        first_day: '20.05.2022',
-                        race_day: '22.05.2022'
-                    },
-                ]
-            });
-
-            document.getElementById("races-table").innerHTML += raceData;
-        </script>
-
         <div class="photo-gallery">
             <div class="flex-gallery">
                 <img class="flex-gallery-photo" src="content/gallery1.jpg">
@@ -208,8 +165,6 @@
                 <img class="flex-gallery-photo" src="content/gallery8.jpg">
             </div>
         </div>
-
-
     </main>
 </div>
 

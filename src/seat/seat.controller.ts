@@ -4,7 +4,7 @@ import { SeatService } from "./seat.service";
 import { CreateSeatDto } from "./dto/create-seat.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
-@ApiTags('processing of seats')
+@ApiTags('Seat')
 @Controller('seat')
 export class SeatController {
   constructor(
