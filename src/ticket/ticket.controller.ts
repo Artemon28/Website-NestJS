@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post } from "@nestjs/common";
+import { Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { Seat, Ticket } from "@prisma/client";
 import { TicketService } from "./ticket.service";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
@@ -20,19 +20,18 @@ export class TicketController {
   }
 
   @ApiOperation({
-    summary: 'Return Seat var'
+    summary: 'Return ticket'
   })
-  @Get()
-  public getSeat(): Promise<Seat>{
-    return this.ticketService.getSeat();
+  @Get(':id')
+  public getTicket(@Param('id') id: string): Promise<Ticket>{
+    return this.ticketService.getTicket({ id: Number(id) });
   }
 
   @ApiOperation({
     summary: 'Delete this ticket'
   })
-  @Delete()
-  public removeTicket(): Promise<Ticket>{
-    return this.ticketService.removeTicket();
+  @Delete(':id')
+  public removeTicket(@Param('id') id: string): Promise<Ticket>{
+    return this.ticketService.removeTicket({ id: Number(id) });
   }
-
 }

@@ -1,6 +1,7 @@
 import { Injectable, NotImplementedException } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { PrismaClient, Ticket, User } from "@prisma/client";
+import { PrismaClient, Ticket, User, Prisma } from "@prisma/client";
+import { PrismaService } from "../Prisma/prisma.service";
 
 
 @Injectable()
@@ -30,28 +31,35 @@ export class UserFactory {
 
 @Injectable()
 export class UserService {
-  constructor() {
-  }
+
+  constructor() {}
 
   public create(dto: CreateUserDto): Promise<User> {
     const userFactory = new UserFactory();
     return userFactory.createFromCreateUserDto(dto);
   }
 
-  public getUserName(id: number): string {
+  public getUser(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+  ): Promise<User | null> {
     throw new NotImplementedException();
   }
 
-  public addUserName(name: string): Promise<User> {
+  public addUserName(userWhereUniqueInput: Prisma.UserWhereUniqueInput, name: string): Promise<User> {
     throw new NotImplementedException();
   }
 
-  //здесь мы создадим билет, отправим в него все нужные нам данные, он зарезервирует место
-  public buyTicket(tribuneId: number, sectorId: number, rowId: number, seatId: number): Promise<Ticket> {
+  public buyTicket(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+    ticket: Ticket,
+  ): Promise<User | null> {
     throw new NotImplementedException();
   }
 
-  public removeTicket(ticketId: number): Promise<Ticket> {
+  public removeTicket(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+    ticket: Ticket,
+  ): Promise<User | null> {
     throw new NotImplementedException();
   }
 

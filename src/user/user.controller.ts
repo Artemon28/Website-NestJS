@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from '@prisma/client'
-import { Ticket, Tribune } from '@prisma/client'
+import { Ticket } from '@prisma/client'
 import { UserService } from "./user.service";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 
@@ -19,57 +19,118 @@ export class UserController {
     status: 201,
     description: 'The user have been successfully created.'
   })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
+  })
   @Post()
   public createUser(@Body() creatUserDto: CreateUserDto): Promise<User> {
     return this.userService.create(creatUserDto);
   }
 
+
   @ApiOperation({
-    summary: 'Get name of user'
+    summary: 'Get user'
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'user information received successfully'
   })
   @ApiResponse({
     status: 403,
     description: 'Forbidden.'
   })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
+  })
   @Get(':id')
-  public getUserName(@Param('id') id: number): string{
-    return this.userService.getUserName(id);
+  public getUser(@Param('id') id: string): Promise<User> {
+    return this.userService.getUser( { id: Number(id) });
   }
+
 
   @ApiOperation({
     summary: 'Add name of user'
   })
   @ApiResponse({
-    status: 201,
-    description: 'Name had been added successfully'
+    status: 200,
+    description: 'the user name has been successfully updated'
   })
-  @Put(':name')
-  public addUserName(@Param('name') name: string): Promise<User> {
-    return this.userService.addUserName(name);
+  @ApiResponse({
+    status: 404,
+    description: 'no user with this id number'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
+  })
+  @Put(':id/name')
+  public addUserName(@Param('id') id: string, @Param('name') name: string): Promise<User> {
+    return this.userService.addUserName({ id: Number(id) }, name);
   }
+
 
   @ApiOperation({
     summary: 'User buying ticket'
   })
   @ApiResponse({
-    status: 201,
-    description: 'Ticket had been bought successfully'
+    status: 200,
+    description: 'ticket successfully purchased'
   })
-  @Put()
-  public buyTicket(tribuneId: number, sectorId: number, rowId: number, seatId: number): Promise<Ticket> {
-    return this.userService.buyTicket(tribuneId, sectorId, rowId, seatId);
+  @ApiResponse({
+    status: 404,
+    description: 'no user with this id number'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
+  })
+  @Put(':id')
+  public addTicket(@Param('id') id: string, ticket: Ticket): Promise<User> {
+    return this.userService.buyTicket({ id: Number(id) }, ticket);
   }
+
 
   @ApiOperation({
     summary: 'Remove ticket from user'
   })
-  @Put()
-  public removeTicket(ticketId: number): Promise<Ticket> {
-    return this.userService.removeTicket(ticketId);
+  @ApiResponse({
+    status: 200,
+    description: 'ticket successfully removed from user'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'no user with this id number or ticket is incorrect'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
+  })
+  @Put(':id')
+  public removeTicket(@Param('id') id: string, ticket: Ticket): Promise<User> {
+    return this.userService.removeTicket({ id: Number(id) }, ticket);
   }
+
 
   @ApiOperation({
     summary: 'Delete this user'
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'user successfully removed'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'no user with this id number'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
   })
   @Delete()
   public removeUser(id: number): Promise<User>{

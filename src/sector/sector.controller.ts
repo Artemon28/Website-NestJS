@@ -20,10 +20,10 @@ export class SectorController {
   }
 
   @ApiOperation({
-    summary: 'get Row object by id'
+    summary: 'get Sector'
   })
   @Get(':id')
-  public getRow(@Param('id') id: number): Promise<Row> {
-    return this.sectorService.getRow(id);
+  public getSector(@Param('id') id: string): Promise<Sector> {
+    return this.sectorService.getSector({ id: Number(id) });
   }
 }

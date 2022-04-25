@@ -1,16 +1,26 @@
 import { Injectable, NotImplementedException } from "@nestjs/common";
-import { Row, Seat } from "@prisma/client";
+import { Prisma, Row, Seat } from "@prisma/client";
 import { CreateRowDto } from "./dto/create-row.dto";
+import { PrismaService } from "../Prisma/prisma.service";
 
 @Injectable()
 export class RowService {
-  constructor() {
-  }
+  constructor() {}
+
   public create(dto: CreateRowDto): Promise<Row> {
     throw new NotImplementedException();
   }
 
-  public getSeat(id: number): Promise<Seat> {
+  public getRow(
+    rowWhereUniqueInput: Prisma.RowWhereUniqueInput,
+  ): Promise<Row | null> {
+    throw new NotImplementedException();
+  }
+
+
+  public removeRow(
+    rowWhereUniqueInput: Prisma.RowWhereUniqueInput,
+  ): Promise<Row | null> {
     throw new NotImplementedException();
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { Seat } from "@prisma/client";
 import { SeatService } from "./seat.service";
 import { CreateSeatDto } from "./dto/create-seat.dto";
@@ -15,23 +15,46 @@ export class SeatController {
     summary: 'Create seat'
   })
   @Post()
-  public create(dto: CreateSeatDto): Promise<Seat>{
-    return this.seatService.create(dto);
+  @Post()
+  public create(@Body() creatSeatDto: CreateSeatDto): Promise<Seat>{
+    return this.seatService.create(creatSeatDto);
   }
 
   @ApiOperation({
     summary: 'Reserve this seat'
   })
-  @Put()
-  public reserveSeat(): Promise<Seat>{
-    return this.seatService.reserve();
+  @Put(':seatNumber')
+  public reserveSeat(@Param('seatNumber') seatNumber: string): Promise<Seat>{
+    return this.seatService.reserve({
+      where: { seatNumber: Number(seatNumber) },
+      data: { isAvailable: true },
+    });
   }
 
   @ApiOperation({
-    summary: 'Return true if this seat is available, either - false'
+    summary: 'Un Reserve seat'
   })
-  @Get()
-  public isFree(): boolean {
-    return this.seatService.isFree();
+  @Put(':seatNumber')
+  public unReserveSeat(@Param('seatNumber') seatNumber: string): Promise<Seat>{
+    return this.seatService.reserve({
+      where: { seatNumber: Number(seatNumber) },
+      data: { isAvailable: false },
+    });
+  }
+
+  @ApiOperation({
+    summary: 'get seat'
+  })
+  @Get(':seatNumber')
+  public getSeat(@Param('seatNumber') seatNumber: string): Promise<Seat> {
+    return this.seatService.getSeat( { seatNumber: Number(seatNumber)});
+  }
+
+  @ApiOperation({
+    summary: 'Delete seat'
+  })
+  @Delete(':seatNumber')
+  public removeSeat(@Param('seatNumber') seatNumber: string): Promise<Seat>{
+    return this.seatService.removeSeat({ seatNumber: Number(seatNumber) });
   }
 }

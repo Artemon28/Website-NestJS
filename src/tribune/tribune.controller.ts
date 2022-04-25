@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { ApiDefaultResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { Sector, Tribune } from "@prisma/client";
 import { TribuneService } from "./tribune.service";
@@ -22,24 +22,20 @@ export class TribuneController {
   @ApiOperation({
     summary: 'add Sector to the tribune'
   })
-  @Put()
-  public addSector(sector: Sector): Promise<Tribune> {
-    return this.tribuneService.addSector(sector);
+  @Put(':id')
+  public addSector(@Param('id') id: string, sector: Sector): Promise<Tribune> {
+    return this.tribuneService.addSector({
+      where: { id: Number(id) },
+      sector,
+    });
   }
 
-  @ApiOperation({
-    summary: 'Return Sector by id'
-  })
-  @Get()
-  public getSector(id: number): Promise<Sector> {
-    return this.tribuneService.getSector(id);
-  }
 
   @ApiOperation({
-    summary: 'Show information about tribune'
+    summary: 'Get Tribune'
   })
-  @Get()
-  public getInfo(): string {
-    return this.tribuneService.getInfo();
+  @Get(':id')
+  public getInfo(@Param('id') id: string): Promise<Tribune> {
+    return this.tribuneService.getTribune( { id: Number(id) });
   }
 }
