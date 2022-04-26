@@ -1,10 +1,27 @@
-import { Get, Controller, Render } from '@nestjs/common';
+import { Controller, Get, Render, UseInterceptors } from "@nestjs/common";
+import { AppInterceptor } from './app.interceptor';
 
 @Controller()
+@UseInterceptors(AppInterceptor)
 export class AppController {
-  @Get()
-  @Render('index') // <= Название вашего представления
-  getIndexPage() {
-    return { message: 'Hello world!' }; // Модель представления
+  @Get(['/', 'index.hbs'])
+  @Render('index')
+  getIndex() {
+    return { isLoggedIn: true };
+  }
+  @Get(['/', 'account.hbs'])
+  @Render('account')
+  getAccount() {
+    return { isLoggedIn: true };
+  }
+  @Get(['/', 'shoppingBag.hbs'])
+  @Render('shoppingBag')
+  getShoppingBag() {
+    return { isLoggedIn: true };
+  }
+  @Get(['/', 'tickets.hbs'])
+  @Render('tickets')
+  getTickets() {
+    return { isLoggedIn: true };
   }
 }

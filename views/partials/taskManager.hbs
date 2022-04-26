@@ -1,0 +1,19 @@
+<div class="TaskManager">
+
+  <form onsubmit="newElement(1);return false" id="TaskHeadid" class="TaskHead">
+    <input type="text" id="myInput" placeholder="Новая задача" autocomplete="off" required>
+  </form>
+  <div class="TaskLines">
+    <ul id="myUL">
+      <template id="line">
+        <li class ="taskLine">
+          <img src="../content/checkeredFlag3.png" class="close">
+          <div class="del">
+            <img src="../content/circle.png" class="circle">
+            <img src="../content/crosss.png" class="cross">
+          </div>
+        </li>
+      </template>
+    </ul>
+  </div>
+</div>
