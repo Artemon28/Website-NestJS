@@ -2,36 +2,36 @@
   <script src="/JS/handlebars.js"></script>
   <div id="header-block"></div>
   <script id="header-template" type="text/x-handlebars-template">
-                <div class="flex-header">
-                    <img class="flex-logo" alt="лого гп России 2022" src="/content/GPlogo.png">
-                    <nav class="flex-navigation">
-                      <a class="nav-href" href="/index.hbs">О нас</a>
-                      <a class="nav-href" href="/tickets.hbs">Билеты</a>
-                      <a class="nav-href" href="/account.hbs">Личный кабинет</a>
-                      <a class="nav-href" href="/shoppingBag.hbs">Корзина</a>
-                </nav>
-                {{#if username}}
-                    <div class="authorization-div">
-                        <p>Logged in as {{username}}</p>
-                        <button class="authorization-button">
-                            Log Out
-                        </button>
-                    </div>
-                {{else}}
-                    <div class="authorization-div">
-                        <form onsubmit="return false">
-                            <input type="text" class="authorization-form" placeholder="Username" autocomplete="off" required>
-                        </form>
-                        <form onsubmit="return false">
-                            <input type="password" class="authorization-form" placeholder="Password" autocomplete="off" required>
-                        </form>
-                        <button class="authorization-button">
-                            Login
-                        </button>
-                    </div>
-                {{/if}}
-                </div>
-            </script>
+      <div class="flex-header">
+          <img class="flex-logo" alt="лого гп России 2022" src="/content/GPlogo.png">
+          <nav class="flex-navigation">
+              <a class="nav-href" href="/index.hbs">О нас</a>
+              <a class="nav-href" href="/tickets.hbs">Билеты</a>
+              <a class="nav-href" href="/account.hbs">Личный кабинет</a>
+              <a class="nav-href" href="/shoppingBag.hbs">Корзина</a>
+          </nav>
+          {{#if username}}
+              <div class="authorization-div">
+                  <p>Logged in as {{username}}</p>
+                  <button class="authorization-button">
+                      Log Out
+                  </button>
+              </div>
+          {{else}}
+            <div class="authorization-div">
+              <form onsubmit="return false">
+                  <input type="text" class="authorization-form" placeholder="Username" autocomplete="off" required>
+              </form>
+              <form onsubmit="return false">
+                  <input type="password" class="authorization-form" placeholder="Password" autocomplete="off" required>
+              </form>
+              <button class="authorization-button">
+                  Login
+              </button>
+            </div>
+          {{/if}}
+      </div>
+  </script>
 
   <div class="small-flex-header">
     <a href=""><img class="nav-menu" src="/content/menu2.png"></a> <!--тут надо сделать всплывающее меню, пока не знаю как и не успеваю-->

@@ -6,22 +6,22 @@ import { AppInterceptor } from './app.interceptor';
 export class AppController {
   @Get(['/', 'index.hbs'])
   @Render('index')
-  getIndex() {
-    return { isLoggedIn: true };
+  getIndexPage() {
+    return { username: 'Artemon28' };
   }
   @Get(['/', 'account.hbs'])
   @Render('account')
   getAccount() {
-    return { isLoggedIn: true };
+    return { username: 'Artemon28' };
   }
   @Get(['/', 'shoppingBag.hbs'])
   @Render('shoppingBag')
   getShoppingBag() {
-    return { isLoggedIn: true };
+    return { username: 'Artemon28' };
   }
   @Get(['/', 'tickets.hbs'])
   @Render('tickets')
   getTickets() {
-    return { isLoggedIn: true };
+    return { username: 'Artemon28' };
   }
 }
