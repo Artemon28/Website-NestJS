@@ -4,17 +4,19 @@ import { NameInterceptor } from "./name.interceptor";
 
 @Controller()
 @UseInterceptors(TimeInterceptor)
-@UseInterceptors(NameInterceptor)
+
 export class AppController {
+  @UseInterceptors(NameInterceptor)
   @Get()
   @Render('index')
   getIndexPage() {
-    return { username: "Artemon28" };
+    return {};
   }
+  @UseInterceptors(NameInterceptor)
   @Get('account')
   @Render('account')
   getAccount() {
-    return { username: "Artemon28" };
+    return {};
   }
   @Get('shoppingBag')
   @Render('shoppingBag')
