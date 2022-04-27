@@ -16,7 +16,6 @@ export class NameInterceptor implements NestInterceptor {
     context: ExecutionContext,
     next: CallHandler,
   ): Observable<Response> {
-    // const now = next.handle().pipe();
-    return next.handle().pipe(map(username => username === null ? false : username ));
+    return next.handle().pipe(map((response) => ({ ...response})));
   }
 }
