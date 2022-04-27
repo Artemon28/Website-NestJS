@@ -1,20 +1,31 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Post,
-  Body,
-  Put,
-  Delete,
-  Render,
-} from '@nestjs/common';
+import { Controller, Get, Render, UseInterceptors } from "@nestjs/common";
+import { TimeInterceptor } from './time.interceptor';
+import { NameInterceptor } from "./name.interceptor";
 
 @Controller()
-export class AppController {
+@UseInterceptors(TimeInterceptor)
 
+export class AppController {
+  @UseInterceptors(NameInterceptor)
   @Get()
-  @Render('index') // <= Название вашего представления
+  @Render('index')
   getIndexPage() {
-    return { user: 'Hello world!' }; // Модель представления
+    return {};
+  }
+  @UseInterceptors(NameInterceptor)
+  @Get('account')
+  @Render('account')
+  getAccount() {
+    return {};
+  }
+  @Get('shoppingBag')
+  @Render('shoppingBag')
+  getShoppingBag() {
+    return {};
+  }
+  @Get('tickets')
+  @Render('tickets')
+  getTickets() {
+    return {};
   }
 }
