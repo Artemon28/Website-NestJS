@@ -90,11 +90,10 @@ export class UserController {
     status: 500,
     description: 'Internal Server Error'
   })
-  @Put(':id')
+  @Put('/:id/ticket')
   public addTicket(@Param('id') id: string, ticket: Ticket): Promise<User> {
     return this.userService.buyTicket({ id: Number(id) }, ticket);
   }
-
 
 
   @ApiOperation({
