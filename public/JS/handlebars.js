@@ -6,19 +6,19 @@ window.onload = function qqq(){
   var quoteData = template({
     links: [
       {
-        link: '/index.hbs',
+        link: 'index',
         linkText: 'О нас'
       },
       {
-        link: '/tickets.hbs',
+        link: 'tickets',
         linkText: 'Билеты'
       },
       {
-        link: '/account.hbs',
+        link: 'account',
         linkText: 'Личный кабинет'
       },
       {
-        link: '/shoppingBag.hbs',
+        link: 'shoppingBag',
         linkText: 'Корзина'
       }
     ]

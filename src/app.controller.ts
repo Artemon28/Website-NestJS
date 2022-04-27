@@ -4,22 +4,22 @@ import { AppInterceptor } from './app.interceptor';
 @Controller()
 @UseInterceptors(AppInterceptor)
 export class AppController {
-  @Get(['/', 'index.hbs'])
+  @Get()
   @Render('index')
   getIndexPage() {
     return { username: 'Artemon28' };
   }
-  @Get(['/', 'account.hbs'])
+  @Get('account')
   @Render('account')
   getAccount() {
     return { username: 'Artemon28' };
   }
-  @Get(['/', 'shoppingBag.hbs'])
+  @Get('shoppingBag')
   @Render('shoppingBag')
   getShoppingBag() {
     return { username: 'Artemon28' };
   }
-  @Get(['/', 'tickets.hbs'])
+  @Get('tickets')
   @Render('tickets')
   getTickets() {
     return { username: 'Artemon28' };
