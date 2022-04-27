@@ -3,13 +3,15 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { AppInterceptor } from "./app.interceptor";
+import { TimeInterceptor } from "./time.interceptor";
+import { NameInterceptor } from "./name.interceptor";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
   );
-  app.useGlobalInterceptors(new AppInterceptor());
+  app.useGlobalInterceptors(new TimeInterceptor());
+  app.useGlobalInterceptors(new NameInterceptor());
   app.useStaticAssets(join(__dirname, '../../', 'public'));
   app.setBaseViewsDir(join(__dirname, '../../', 'views'));
   const hbs = require('hbs');

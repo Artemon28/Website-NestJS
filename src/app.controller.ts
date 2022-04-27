@@ -1,27 +1,29 @@
 import { Controller, Get, Render, UseInterceptors } from "@nestjs/common";
-import { AppInterceptor } from './app.interceptor';
+import { TimeInterceptor } from './time.interceptor';
+import { NameInterceptor } from "./name.interceptor";
 
 @Controller()
-@UseInterceptors(AppInterceptor)
+@UseInterceptors(TimeInterceptor)
+@UseInterceptors(NameInterceptor)
 export class AppController {
   @Get()
   @Render('index')
   getIndexPage() {
-    return { username: 'Artemon28' };
+    return { username: "Artemon28" };
   }
   @Get('account')
   @Render('account')
   getAccount() {
-    return { username: 'Artemon28' };
+    return { username: "Artemon28" };
   }
   @Get('shoppingBag')
   @Render('shoppingBag')
   getShoppingBag() {
-    return { username: 'Artemon28' };
+    return {};
   }
   @Get('tickets')
   @Render('tickets')
   getTickets() {
-    return { username: 'Artemon28' };
+    return {};
   }
 }
