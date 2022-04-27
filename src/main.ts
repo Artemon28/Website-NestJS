@@ -10,10 +10,10 @@ async function bootstrap() {
     AppModule,
   );
   app.useGlobalInterceptors(new AppInterceptor());
-  app.useStaticAssets(join(__dirname, '..', 'public'));
-  app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  app.useStaticAssets(join(__dirname, '../../', 'public'));
+  app.setBaseViewsDir(join(__dirname, '../../', 'views'));
   const hbs = require('hbs');
-  hbs.registerPartials(join(__dirname, '..', 'views/partials'));
+  hbs.registerPartials(join(__dirname, '../../', 'views/partials'));
   app.setViewEngine('hbs');
 
   const config = new DocumentBuilder()
