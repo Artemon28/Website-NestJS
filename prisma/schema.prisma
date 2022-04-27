@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+    id        Int     @default(autoincrement()) @id
+    email     String  @unique
+    name      String?
+    password  String
+    tickets    Ticket[]
+}
+
+model Ticket{
+    id        Int     @default(autoincrement()) @id
+    name      String
+    email     String
+    seat      Seat?
+    cost      Int
+    user      User?  @relation(fields: [userid], references: [id])
+    userid    Int?
+}
+
+model Tribune{
+    id           Int     @default(autoincrement()) @id
+    sectors      Sector[]
+    description  String
+}
+
+model Sector{
+    id        Int      @default(autoincrement()) @id
+    rows      Row[]
+    tribune   Tribune? @relation(fields: [tribuneid], references: [id])
+    tribuneid Int?
+}
+
+model Row{
+    id        Int     @default(autoincrement()) @id
+    rowNumber Int
+    seats     Seat[]
+    sector    Sector? @relation(fields: [sectorid], references: [id])
+    sectorid  Int?
+}
+
+model Seat{
+     seatNumber  Int  @unique
+     ticket      Ticket? @relation(fields: [ticketid], references: [id])
+     ticketid    Int?
+     row         Row?  @relation(fields: [rowid], references: [id])
+     rowid       Int?
+     isAvailable Boolean @default(true)
+ }

@@ -26,4 +26,3 @@ window.onload = function qqq(){
 
   document.getElementById("header-block").innerHTML += quoteData;
 }
-
