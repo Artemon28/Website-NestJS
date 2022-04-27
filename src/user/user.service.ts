@@ -45,7 +45,7 @@ export class UserService {
     throw new NotImplementedException();
   }
 
-  public addUserName(userWhereUniqueInput: Prisma.UserWhereUniqueInput, name: string): Promise<User> {
+  public addUserName(userWhereUniqueInput: Prisma.UserWhereUniqueInput, dto: CreateUserDto): Promise<User> {
     throw new NotImplementedException();
   }
 

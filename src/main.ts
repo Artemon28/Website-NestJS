@@ -16,12 +16,6 @@ async function bootstrap() {
     .setTitle('CTicket seller')
     .setDescription('Attributes for selling tickets')
     .setVersion('1.0')
-    .addTag('Tribune')
-    .addTag('Sector')
-    .addTag('Row')
-    .addTag('Seat')
-    .addTag('Ticket')
-    .addTag('User')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

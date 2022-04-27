@@ -69,9 +69,9 @@ export class UserController {
     status: 500,
     description: 'Internal Server Error'
   })
-  @Put(':id/name')
-  public addUserName(@Param('id') id: string, @Param('name') name: string): Promise<User> {
-    return this.userService.addUserName({ id: Number(id) }, name);
+  @Put(':id')
+  public addUserName(@Param('id') id: string, @Body() creatUserDto: CreateUserDto): Promise<User> {
+    return this.userService.addUserName({ id: Number(id) }, creatUserDto);
   }
 
 
@@ -95,26 +95,6 @@ export class UserController {
     return this.userService.buyTicket({ id: Number(id) }, ticket);
   }
 
-
-  @ApiOperation({
-    summary: 'Remove ticket from user'
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'ticket successfully removed from user'
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'no user with this id number or ticket is incorrect'
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'Internal Server Error'
-  })
-  @Put(':id')
-  public removeTicket(@Param('id') id: string, ticket: Ticket): Promise<User> {
-    return this.userService.removeTicket({ id: Number(id) }, ticket);
-  }
 
 
   @ApiOperation({
