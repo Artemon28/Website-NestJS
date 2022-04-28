@@ -4,6 +4,7 @@ import { PrismaClient, Ticket, User, Prisma } from "@prisma/client";
 import { PrismaService } from "../Prisma/prisma.service";
 
 
+
 @Injectable()
 export class UserFactory {
   public async createFromCreateUserDto(createUserDto: CreateUserDto): Promise<User> {
@@ -32,7 +33,7 @@ export class UserFactory {
 @Injectable()
 export class UserService {
 
-  constructor() {}
+  constructor(private prisma: PrismaService) {}
 
   public create(dto: CreateUserDto): Promise<User> {
     const userFactory = new UserFactory();
@@ -45,8 +46,15 @@ export class UserService {
     throw new NotImplementedException();
   }
 
-  public addUserName(userWhereUniqueInput: Prisma.UserWhereUniqueInput, dto: CreateUserDto): Promise<User> {
-    throw new NotImplementedException();
+  async addUserName(id: { id: number }, userDto: { creatUserDto: CreateUserDto }): Promise<User> | null {
+    return await this.prisma.user.update({
+      data: {
+        ...userDto,
+      },
+      where: {
+        id: Number(id),
+      },
+    });
   }
 
   public buyTicket(

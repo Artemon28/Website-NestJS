@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Session, UseGuards } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from '@prisma/client'
 import { Ticket } from '@prisma/client'
 import { UserService } from "./user.service";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiCookieAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { AuthGuard } from "../auth/auth.guard";
+import { SessionContainer } from "supertokens-node/recipe/session";
 
 @ApiTags('User')
 @Controller('/user')
@@ -54,6 +56,9 @@ export class UserController {
   }
 
 
+  @ApiCookieAuth()
+  @Get('test')
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Add name of user'
   })
@@ -70,9 +75,9 @@ export class UserController {
     description: 'Internal Server Error'
   })
   @Put(':id')
-  public addUserName(@Param('id') id: string, @Body() creatUserDto: CreateUserDto): Promise<User> {
-    return this.userService.addUserName({ id: Number(id) }, creatUserDto);
-  }
+  public async addUserName(@Session() session: SessionContainer, @Param('id') id: number, @Body() creatUserDto: CreateUserDto): Promise<User> {
+    return this.userService.addUserName({ id }, { creatUserDto})
+  };
 
 
   @ApiOperation({
