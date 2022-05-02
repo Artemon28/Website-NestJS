@@ -9,10 +9,7 @@ export class SeatFactory {
     const prisma = new PrismaClient({})
     return await prisma.seat.create({
       data: {
-        seatNumber: createSeatDto.seatNumber,
-        ticketid: createSeatDto.ticketId,
-        rowid: createSeatDto.rowId,
-        isAvailable: createSeatDto.isAvailable,
+        isAvailable: false,
       },
     });
   }

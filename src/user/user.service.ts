@@ -11,7 +11,6 @@ export class UserFactory {
     if (createUserDto.name == null){
       return await prisma.user.create({
         data: {
-          id: createUserDto.id,
           email: createUserDto.email,
           password: createUserDto.password,
         },
@@ -19,7 +18,6 @@ export class UserFactory {
     } else {
       return await prisma.user.create({
         data: {
-          id: createUserDto.id,
           name: createUserDto.name,
           email: createUserDto.email,
           password: createUserDto.password,

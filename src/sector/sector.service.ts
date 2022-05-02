@@ -9,12 +9,13 @@ import { TribuneFactory } from "../tribune/tribune.service";
 export class SectorFactory {
   public async createFromCreateSectorDto(createSectorDto: CreateSectorDto): Promise<Sector> {
     const prisma = new PrismaClient({})
-    return await prisma.sector.create({
-      data: {
-        tribuneid: createSectorDto.tribuneId,
-        id: createSectorDto.tribuneId,
-      },
-    });
+    return await prisma.sector.create({data: {}});
+    // return await prisma.sector.create({
+    //   data: {
+    //     tribuneid: createSectorDto.tribuneId,
+    //     id: createSectorDto.tribuneId,
+    //   },
+    // });
   }
 }
 

@@ -11,11 +11,9 @@ export class TicketFactory {
     const prisma = new PrismaClient({})
     return await prisma.ticket.create({
       data: {
-        id: createTicketDto.id,
         name: createTicketDto.name,
         email: createTicketDto.email,
         cost: createTicketDto.cost,
-        userid: createTicketDto.userid,
       },
     });
   }

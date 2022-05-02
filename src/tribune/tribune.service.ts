@@ -10,7 +10,6 @@ export class TribuneFactory {
     const prisma = new PrismaClient({})
     return await prisma.tribune.create({
       data: {
-        id: createTribuneDto.id,
         description: createTribuneDto.description,
       },
     });

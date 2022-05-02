@@ -6,14 +6,8 @@ import { PrismaService } from "../prisma.service";
 @Injectable()
 export class RowFactory {
   public async createFromCreateRowDto(createRowDto: CreateRowDto): Promise<Row> {
-    const prisma = new PrismaClient({})
-    return await prisma.row.create({
-      data: {
-        id: createRowDto.id,
-        rowNumber: createRowDto.rowNumber,
-        sectorid: createRowDto.sectorId,
-      },
-    });
+    const prisma = new PrismaClient({});
+    return await prisma.row.create({data: {}});
   }
 }
 

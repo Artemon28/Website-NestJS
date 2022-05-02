@@ -43,14 +43,13 @@ model Sector{
 
 model Row{
     id        Int     @default(autoincrement()) @id
-    rowNumber Int
     seats     Seat[]
     sector    Sector? @relation(fields: [sectorid], references: [id])
     sectorid  Int?
 }
 
 model Seat{
-     seatNumber  Int  @unique
+     seatNumber  Int  @default(autoincrement()) @id
      ticket      Ticket? @relation(fields: [ticketid], references: [id])
      ticketid    Int?
      row         Row?  @relation(fields: [rowid], references: [id])
