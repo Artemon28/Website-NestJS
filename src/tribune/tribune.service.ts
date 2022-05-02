@@ -1,6 +1,8 @@
 import { Injectable, NotImplementedException } from "@nestjs/common";
 import { Prisma, PrismaClient, Sector, Tribune, User } from "@prisma/client";
+import { Prisma, Sector, Tribune } from "@prisma/client";
 import { CreateTribuneDto } from "./dto/create-tribune.dto";
+import { PrismaService } from "../Prisma/prisma.service";
 import { CreateUserDto } from "../user/dto/create-user.dto";
 import { PrismaService } from "../prisma.service";
 
@@ -37,10 +39,7 @@ export class TribuneService {
       where,
     });
   }
-
-  public getSector(id: number): Promise<Sector> {
-    throw new NotImplementedException();
-  }
+  
 
   public getTribune(
     tribuneWhereUniqueInput: Prisma.TribuneWhereUniqueInput,

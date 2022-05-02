@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title>F1 tickets Sochi gp</title>
+  {{>commonHeader}}
+  <link href="/CSS/loading.css" rel="stylesheet">
+  <script src="/JS/promises.js"></script>
+</head>
+
+<body class="tickets-seller">
+<div id="wrap">
+  {{>header  username = username}}
+  <main>
+    {{>promisesFun}}
+  </main>
+</div>
+{{>footer data = data}}
+</body>
+
+</html>

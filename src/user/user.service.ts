@@ -2,6 +2,8 @@ import { Injectable, NotImplementedException, Param, Patch } from "@nestjs/commo
 import { CreateUserDto } from "./dto/create-user.dto";
 import { PrismaClient, Ticket, User, Prisma } from "@prisma/client";
 import { PrismaService } from "../prisma.service";
+import { PrismaClient, Ticket, User, Prisma } from "@prisma/client";
+import { PrismaService } from "../Prisma/prisma.service";
 
 
 @Injectable()
@@ -58,12 +60,17 @@ export class UserService {
     });
   }
 
-  //здесь мы создадим билет, отправим в него все нужные нам данные, он зарезервирует место
-  public buyTicket(tribuneId: number, sectorId: number, rowId: number, seatId: number): Promise<User> {
+  public buyTicket(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+    ticket: Ticket,
+  ): Promise<User | null> {
     throw new NotImplementedException();
   }
 
-  public removeTicket(ticketId: number): Promise<Ticket> {
+  public removeTicket(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+    ticket: Ticket,
+  ): Promise<User | null> {
     throw new NotImplementedException();
   }
 
