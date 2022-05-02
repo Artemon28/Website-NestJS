@@ -57,7 +57,6 @@ export class UserController {
 
 
   @ApiCookieAuth()
-  @Get('test')
   @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Add name of user'
