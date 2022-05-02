@@ -1,10 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { Row, Seat } from "@prisma/client";
+import { Row } from "@prisma/client";
 import { RowService } from "./row.service";
 import { CreateRowDto } from "./dto/create-row.dto";
-import { SeatService } from "../seat/seat.service";
-import { CreateSeatDto } from "../seat/dto/create-seat.dto";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('Row')
@@ -68,14 +65,6 @@ export class RowController {
   @ApiResponse({
     status: 500,
     description: 'Internal Server Error'
-  })
-  @Delete(':id')
-  public removeSeat(@Param('id') id: string): Promise<Row>{
-    return this.rowService.removeRow({ id: Number(id) });
-  }
-
-  @ApiOperation({
-    summary: 'Delete row'
   })
   @Delete(':id')
   public removeSeat(@Param('id') id: string): Promise<Row>{

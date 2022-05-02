@@ -3,7 +3,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from '@prisma/client'
 import { Ticket } from '@prisma/client'
 import { UserService } from "./user.service";
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('User')
 @Controller('/user')

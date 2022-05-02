@@ -11,25 +11,25 @@ export class TicketController {
     private readonly ticketService: TicketService,
   ) {}
 
-  @ApiOperation({
-    summary: 'Create ticket'
-  })
-  @ApiResponse({
-    status: 201,
-    description: 'The ticket have been successfully created.'
-  })
-  @ApiResponse({
-    status: 403,
-    description: 'Forbidden'
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'Internal Server Error'
-  })
-  @Post()
-  public createTicket(dto: CreateTicketDto): Promise<Ticket>{
-    return this.ticketService.create(dto);
-  }
+  // @ApiOperation({
+  //   summary: 'Create ticket'
+  // })
+  // @ApiResponse({
+  //   status: 201,
+  //   description: 'The ticket have been successfully created.'
+  // })
+  // @ApiResponse({
+  //   status: 403,
+  //   description: 'Forbidden'
+  // })
+  // @ApiResponse({
+  //   status: 500,
+  //   description: 'Internal Server Error'
+  // })
+  // @Post()
+  // public createTicket(dto: CreateTicketDto): Promise<Ticket>{
+  //   return this.ticketService.create(dto);
+  // }
 
   @ApiOperation({
     summary: 'Return ticket'

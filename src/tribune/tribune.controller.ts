@@ -1,11 +1,9 @@
 import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { Sector, Tribune, User } from "@prisma/client";
-import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
-import { ApiDefaultResponse, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Sector, Tribune } from "@prisma/client";
 import { TribuneService } from "./tribune.service";
 import { CreateTribuneDto } from "./dto/create-tribune.dto";
+import { CreateSectorDto } from "../sector/dto/create-sector.dto";
 
 @ApiTags('Tribune')
 @Controller('/tribune')
@@ -46,12 +44,9 @@ export class TribuneController {
     status: 500,
     description: 'Internal Server Error'
   })
-  @Put(':id')
-  public addSector(@Param('id') id: string, sector: Sector): Promise<Tribune> {
-    return this.tribuneService.addSector({
-      where: { id: Number(id) },
-      sector,
-    });
+  @Put(':id/sector/:sectorId')
+  public addSector(@Param('id') id: string, @Param('sectorId') sector: string): Promise<Tribune> {
+    return this.tribuneService.addSector({ id: Number(id)}, { id: Number(sector) });
   }
 
 

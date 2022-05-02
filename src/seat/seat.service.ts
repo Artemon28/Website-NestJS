@@ -1,9 +1,7 @@
-import { Injectable, NotImplementedException } from "@nestjs/common";
-import { Prisma, PrismaClient, Seat, Tribune, User } from "@prisma/client";
+import { Injectable } from "@nestjs/common";
+import { Prisma, PrismaClient, Seat } from "@prisma/client";
 import { CreateSeatDto } from "./dto/create-seat.dto";
-import { CreateTribuneDto } from "../tribune/dto/create-tribune.dto";
 import { PrismaService } from "../prisma.service";
-import { TribuneFactory } from "../tribune/tribune.service";
 
 @Injectable()
 export class SeatFactory {

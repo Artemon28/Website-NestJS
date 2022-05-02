@@ -2,8 +2,6 @@ import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { Row, Seat, Sector } from "@prisma/client";
 import { SectorService } from "./sector.service";
 import { CreateSectorDto } from "./dto/create-sector.dto";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { CreateSeatDto } from "../seat/dto/create-seat.dto";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('Sector')

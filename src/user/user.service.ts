@@ -2,8 +2,6 @@ import { Injectable, NotImplementedException, Param, Patch } from "@nestjs/commo
 import { CreateUserDto } from "./dto/create-user.dto";
 import { PrismaClient, Ticket, User, Prisma } from "@prisma/client";
 import { PrismaService } from "../prisma.service";
-import { PrismaClient, Ticket, User, Prisma } from "@prisma/client";
-import { PrismaService } from "../Prisma/prisma.service";
 
 
 @Injectable()
@@ -49,14 +47,23 @@ export class UserService {
     });
   }
 
-  async addUserName(params: {
-    where: Prisma.UserWhereUniqueInput;
-    data: Prisma.UserUpdateInput;
-  }): Promise<User> {
-    const { where, data } = params;
+  // async addUserName(params: {
+  //   where: Prisma.UserWhereUniqueInput;
+  //   data: Prisma.UserUpdateInput;
+  // }): Promise<User> {
+  //   const { where, data } = params;
+  //   return this.prisma.user.update({
+  //     data,
+  //     where,
+  //   });
+  // }
+
+  async addUserName(userWhereUniqueInput: Prisma.UserWhereUniqueInput, dto: CreateUserDto): Promise<User> {
     return this.prisma.user.update({
-      data,
-      where,
+      where: userWhereUniqueInput,
+      data: {
+        name: dto.name,
+      }
     });
   }
 

@@ -1,9 +1,6 @@
-import { Injectable, NotImplementedException } from "@nestjs/common";
-import { Prisma, Row, Seat } from "@prisma/client";
 import { Injectable } from "@nestjs/common";
 import { Prisma, PrismaClient, Row } from "@prisma/client";
 import { CreateRowDto } from "./dto/create-row.dto";
-import { PrismaService } from "../Prisma/prisma.service";
 import { PrismaService } from "../prisma.service";
 
 @Injectable()
