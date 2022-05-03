@@ -1,6 +1,6 @@
-import { Injectable, NotImplementedException, Param, Patch } from "@nestjs/common";
+import { PrismaClient, User, Prisma } from "@prisma/client";
+import { Injectable } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { PrismaClient, Ticket, User, Prisma } from "@prisma/client";
 import { PrismaService } from "../prisma.service";
 
 
@@ -8,22 +8,9 @@ import { PrismaService } from "../prisma.service";
 export class UserFactory {
   public async createFromCreateUserDto(createUserDto: CreateUserDto): Promise<User> {
     const prisma = new PrismaClient({})
-    if (createUserDto.name == null){
-      return await prisma.user.create({
-        data: {
-          email: createUserDto.email,
-          password: createUserDto.password,
-        },
-      });
-    } else {
-      return await prisma.user.create({
-        data: {
-          name: createUserDto.name,
-          email: createUserDto.email,
-          password: createUserDto.password,
-        },
-      });
-    }
+    return await prisma.user.create({
+      data: createUserDto,
+    })
   }
 }
 
@@ -45,16 +32,6 @@ export class UserService {
     });
   }
 
-  // async addUserName(params: {
-  //   where: Prisma.UserWhereUniqueInput;
-  //   data: Prisma.UserUpdateInput;
-  // }): Promise<User> {
-  //   const { where, data } = params;
-  //   return this.prisma.user.update({
-  //     data,
-  //     where,
-  //   });
-  // }
 
   async addUserName(userWhereUniqueInput: Prisma.UserWhereUniqueInput, dto: CreateUserDto): Promise<User> {
     return this.prisma.user.update({
@@ -65,18 +42,18 @@ export class UserService {
     });
   }
 
-  public buyTicket(
+  public addTicket(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
-    ticket: Ticket,
+    ticketWhereUniqueInput: Prisma.TicketWhereUniqueInput
   ): Promise<User | null> {
-    throw new NotImplementedException();
-  }
-
-  public removeTicket(
-    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
-    ticket: Ticket,
-  ): Promise<User | null> {
-    throw new NotImplementedException();
+    return this.prisma.user.update({
+      where: userWhereUniqueInput,
+      data: {
+        tickets: {
+          connect: {id: ticketWhereUniqueInput.id},
+        },
+      },
+    });
   }
 
   public removeUser(

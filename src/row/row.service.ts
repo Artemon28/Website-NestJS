@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Prisma, PrismaClient, Row } from "@prisma/client";
+import { Prisma, PrismaClient, Row, Tribune } from "@prisma/client";
 import { CreateRowDto } from "./dto/create-row.dto";
 import { PrismaService } from "../prisma.service";
 
@@ -27,6 +27,18 @@ export class RowService {
   ): Promise<Row | null> {
     return this.prisma.row.findUnique({
       where: rowWhereUniqueInput,
+    });
+  }
+
+
+  public async addSeat(rowWhereUniqueInput: Prisma.RowWhereUniqueInput, seatWhereUniqueInput: Prisma.SeatWhereUniqueInput): Promise<Row> {
+    return this.prisma.row.update({
+      where: rowWhereUniqueInput,
+      data: {
+        seats: {
+          connect: {seatNumber: seatWhereUniqueInput.seatNumber},
+        },
+      },
     });
   }
 

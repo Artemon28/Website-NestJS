@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { Row } from "@prisma/client";
 import { RowService } from "./row.service";
 import { CreateRowDto } from "./dto/create-row.dto";
@@ -47,9 +47,31 @@ export class RowController {
     description: 'Internal Server Error'
   })
   @Get(':id')
-  public getSeat(@Param('id') id: string): Promise<Row> {
+  public getRow(@Param('id') id: string): Promise<Row> {
     return this.rowService.getRow( { id: Number(id)});
   }
+
+
+  @ApiOperation({
+    summary: 'add Sector to the tribune'
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'sector successfully added to the tribune'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'no tribune with this id number'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
+  })
+  @Put(':id/sector/:seatId')
+  public addSector(@Param('id') id: string, @Param('seatId') seatId: string): Promise<Row> {
+    return this.rowService.addSeat({ id: Number(id)}, { seatNumber: Number(seatId) });
+  }
+
 
   @ApiOperation({
     summary: 'Delete row'

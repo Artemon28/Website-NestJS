@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Prisma, PrismaClient, Ticket } from "@prisma/client";
+import { Prisma, PrismaClient, Ticket, User } from "@prisma/client";
 import { CreateTicketDto } from "./dto/create-ticket.dto";
 import { PrismaService } from "../prisma.service";
 
@@ -7,14 +7,17 @@ import { PrismaService } from "../prisma.service";
 
 @Injectable()
 export class TicketFactory {
-  public async createFromCreateTicketDto(createTicketDto: CreateTicketDto): Promise<Ticket> {
+  public async createFromCreateTicketDto(createTicketDto: CreateTicketDto, seatWhereUniqueInput: Prisma.SeatWhereUniqueInput): Promise<Ticket> {
     const prisma = new PrismaClient({})
     return await prisma.ticket.create({
       data: {
         name: createTicketDto.name,
-        email: createTicketDto.email,
         cost: createTicketDto.cost,
-      },
+        email: createTicketDto.email,
+        seat: {
+          connect: { seatNumber: seatWhereUniqueInput.seatNumber },
+        },
+      }
     });
   }
 }
@@ -24,22 +27,13 @@ export class TicketService {
 
   constructor(private prisma: PrismaService) {}
 
-  // public create(
-  //   dto: CreateTicketDto,
-  //   seatWhereUniqueInput: Prisma.SeatWhereUniqueInput,
-  // ): Promise<Ticket>{
-  //   const ticketFactory = new TicketFactory();
-  //   ticketFactory.createFromCreateTicketDto(dto);
-  //   return this.addSeat({ id: Number(dto.id) }, seatWhereUniqueInput);
-  // }
-
-  // private addSeat(ticketWhereUniqueInput: Prisma.TicketWhereUniqueInput, seatWhereUniqueInput: Prisma.SeatWhereUniqueInput): Promise<Ticket>{
-  //   this.prisma.ticket.update({
-  //     where: ticketWhereUniqueInput,
-  //     data: this.prisma.seat.findUnique({ where: seatWhereUniqueInput }), //??????
-  //   })
-  //   throw new NotImplementedException();
-  // }
+  public create(
+    dto: CreateTicketDto,
+    seatWhereUniqueInput: Prisma.SeatWhereUniqueInput,
+  ): Promise<Ticket>{
+    const ticketFactory = new TicketFactory();
+    return ticketFactory.createFromCreateTicketDto(dto, seatWhereUniqueInput);
+  }
 
 
   public getTicket(
