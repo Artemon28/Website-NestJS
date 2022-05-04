@@ -1,10 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { CreateUserDto } from "./dto/create-user.dto";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
+import { CreateUserDto, UpdateUserDto } from "./dto/create-user.dto";
 import { User } from '@prisma/client'
 import { UserService } from "./user.service";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Roles } from "../role/role.decorator";
+import { RolesGuard } from "../role/role.guard";
 
 @ApiTags('User')
+@UseGuards(RolesGuard)
 @Controller('/user')
 export class UserController {
   constructor(
@@ -47,9 +50,10 @@ export class UserController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Get(':id')
-  public getUser(@Param('id') id: string): Promise<User> {
-    return this.userService.getUser( { id: Number(id) });
+  public getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
+    return this.userService.getUser({ id });
   }
 
   @ApiOperation({
@@ -67,9 +71,10 @@ export class UserController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('AuthUser')
   @Put(':id')
-  public addUserName(@Param('id') id: string, @Body() creatUserDto: CreateUserDto): Promise<User> {
-    return this.userService.addUserName({ id: Number(id) }, creatUserDto);
+  public addUserName(@Param('id', ParseIntPipe) id: number, @Body() updateUserDto: UpdateUserDto): Promise<User> {
+    return this.userService.addUserName({ id }, updateUserDto);
   }
 
   @ApiOperation({
@@ -87,9 +92,10 @@ export class UserController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('AuthUser')
   @Put('/:id/ticket/:ticketId')
-  public addTicket(@Param('id') id: string, @Param('ticketId') ticket: string): Promise<User> {
-    return this.userService.addTicket({ id: Number(id) }, { id: Number(ticket) });
+  public addTicket(@Param('id', ParseIntPipe) id: number, @Param('ticketId') ticket: string): Promise<User> {
+    return this.userService.addTicket({ id }, { id: Number(ticket) });
   }
 
   @ApiOperation({
@@ -107,8 +113,9 @@ export class UserController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('AuthUser')
   @Delete(':id')
-  public removeUser(@Param('id') id: string): Promise<User>{
-    return this.userService.removeUser({ id: Number(id) });
+  public removeUser(@Param('id', ParseIntPipe) id: number): Promise<User>{
+    return this.userService.removeUser({ id });
   }
 }

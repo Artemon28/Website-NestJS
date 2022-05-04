@@ -1,10 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { Seat } from "@prisma/client";
 import { SeatService } from "./seat.service";
 import { CreateSeatDto } from "./dto/create-seat.dto";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Roles } from "../role/role.decorator";
+import { RolesGuard } from "../role/role.guard";
 
 @ApiTags('Seat')
+@UseGuards(RolesGuard)
 @Controller('seat')
 export class SeatController {
   constructor(
@@ -26,6 +29,7 @@ export class SeatController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Post()
   public create(@Body() creatSeatDto: CreateSeatDto): Promise<Seat>{
     return this.seatService.create(creatSeatDto);
@@ -46,10 +50,11 @@ export class SeatController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Put(':seatNumber')
-  public reserveSeat(@Param('seatNumber') seatNumber: string): Promise<Seat>{
+  public reserveSeat(@Param('seatNumber', ParseIntPipe) seatNumber: number): Promise<Seat>{
     return this.seatService.reserve({
-      where: { seatNumber: Number(seatNumber) },
+      where: { seatNumber },
       data: { isAvailable: true },
     });
   }
@@ -69,10 +74,11 @@ export class SeatController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Put(':seatNumber')
-  public unReserveSeat(@Param('seatNumber') seatNumber: string): Promise<Seat>{
+  public unReserveSeat(@Param('seatNumber', ParseIntPipe) seatNumber: number): Promise<Seat>{
     return this.seatService.reserve({
-      where: { seatNumber: Number(seatNumber) },
+      where: { seatNumber },
       data: { isAvailable: false },
     });
   }
@@ -92,9 +98,10 @@ export class SeatController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Get(':seatNumber')
-  public getSeat(@Param('seatNumber') seatNumber: string): Promise<Seat> {
-    return this.seatService.getSeat( { seatNumber: Number(seatNumber)});
+  public getSeat(@Param('seatNumber', ParseIntPipe) seatNumber: number): Promise<Seat> {
+    return this.seatService.getSeat( { seatNumber });
   }
 
   @ApiOperation({
@@ -112,8 +119,9 @@ export class SeatController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Delete(':seatNumber')
-  public removeSeat(@Param('seatNumber') seatNumber: string): Promise<Seat>{
-    return this.seatService.removeSeat({ seatNumber: Number(seatNumber) });
+  public removeSeat(@Param('seatNumber', ParseIntPipe) seatNumber: number): Promise<Seat>{
+    return this.seatService.removeSeat({ seatNumber });
   }
 }

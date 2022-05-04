@@ -1,10 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
 import { Seat, Ticket } from "@prisma/client";
 import { TicketService } from "./ticket.service";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateTicketDto } from "./dto/create-ticket.dto";
+import { Roles } from "../role/role.decorator";
+import { RolesGuard } from "../role/role.guard";
 
 @ApiTags('Ticket')
+@UseGuards(RolesGuard)
 @Controller('ticket')
 export class TicketController {
   constructor(
@@ -26,6 +29,7 @@ export class TicketController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('AuthUser')
   @Post('ticket/seat/:seatNumber')
   public createTicket(@Body() dto: CreateTicketDto, @Param('seatNumber') seatNumber: string): Promise<Ticket>{
     return this.ticketService.create(dto, {seatNumber: Number(seatNumber)});
@@ -46,16 +50,18 @@ export class TicketController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('AuthUser')
   @Get(':id')
-  public getTicket(@Param('id') id: string): Promise<Ticket>{
-    return this.ticketService.getTicket({ id: Number(id) });
+  public getTicket(@Param('id', ParseIntPipe) id: number): Promise<Ticket>{
+    return this.ticketService.getTicket({ id });
   }
 
   @ApiOperation({
     summary: 'Delete this ticket'
   })
+  @Roles('AuthUser')
   @Delete(':id')
-  public removeTicket(@Param('id') id: string): Promise<Ticket>{
-    return this.ticketService.removeTicket({ id: Number(id) });
+  public removeTicket(@Param('id', ParseIntPipe) id: number): Promise<Ticket>{
+    return this.ticketService.removeTicket({ id });
   }
 }

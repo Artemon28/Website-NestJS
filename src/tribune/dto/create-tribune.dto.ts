@@ -1,10 +1,9 @@
 import { Sector } from '@prisma/client'
 import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsString } from "class-validator";
 export class CreateTribuneDto {
   @ApiProperty()
-  readonly id: number
-  @ApiProperty()
-  readonly sectors: Sector[]
-  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   readonly description: string
 }

@@ -4,13 +4,14 @@ import { join } from 'path';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { TimeInterceptor } from "./time.interceptor";
-import { NameInterceptor } from "./name.interceptor";
+import { ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
   );
   app.useGlobalInterceptors(new TimeInterceptor());
+  app.useGlobalPipes(new ValidationPipe());
   app.useStaticAssets(join(__dirname, '../../', 'public'));
   app.setBaseViewsDir(join(__dirname, '../../', 'views'));
   const hbs = require('hbs');

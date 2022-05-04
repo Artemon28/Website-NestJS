@@ -1,10 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { Sector, Tribune } from "@prisma/client";
 import { SectorService } from "./sector.service";
 import { CreateSectorDto } from "./dto/create-sector.dto";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Roles } from "../role/role.decorator";
+import { RolesGuard } from "../role/role.guard";
 
 @ApiTags('Sector')
+@UseGuards(RolesGuard)
 @Controller('sector')
 export class SectorController {
   constructor(
@@ -26,6 +29,7 @@ export class SectorController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Post()
   public createSector(@Body() creatSectorDto: CreateSectorDto): Promise<Sector> {
     return this.sectorService.create(creatSectorDto);
@@ -47,9 +51,10 @@ export class SectorController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Put(':id/row/:rowId')
-  public addRow(@Param('id') id: string, @Param('rowId') row: string): Promise<Sector> {
-    return this.sectorService.addRow({ id: Number(id)}, { id: Number(row) });
+  public addRow(@Param('id', ParseIntPipe) id: number, @Param('rowId', ParseIntPipe) row: number): Promise<Sector> {
+    return this.sectorService.addRow({ id }, { id: row });
   }
 
 
@@ -68,9 +73,10 @@ export class SectorController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Get(':id')
-  public getSector(@Param('id') id: string): Promise<Sector> {
-    return this.sectorService.getSector({ id: Number(id) });
+  public getSector(@Param('id', ParseIntPipe) id: number): Promise<Sector> {
+    return this.sectorService.getSector({ id });
   }
 
 
@@ -89,8 +95,9 @@ export class SectorController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Delete(':id')
-  public deleteSector(@Param('id') id: string): Promise<Sector> {
-    return this.sectorService.deleteSector({ id: Number(id) });
+  public deleteSector(@Param('id', ParseIntPipe) id: number): Promise<Sector> {
+    return this.sectorService.deleteSector({ id });
   }
 }

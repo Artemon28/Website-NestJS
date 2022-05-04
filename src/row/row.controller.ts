@@ -1,10 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { Row } from "@prisma/client";
 import { RowService } from "./row.service";
 import { CreateRowDto } from "./dto/create-row.dto";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Roles } from "../role/role.decorator";
+import { RolesGuard } from "../role/role.guard";
 
 @ApiTags('Row')
+@UseGuards(RolesGuard)
 @Controller('row')
 export class RowController {
   constructor(
@@ -26,6 +29,7 @@ export class RowController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Post()
   public create(@Body() createRowDto: CreateRowDto): Promise<Row>{
     return this.rowService.create(createRowDto);
@@ -46,9 +50,10 @@ export class RowController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Get(':id')
-  public getRow(@Param('id') id: string): Promise<Row> {
-    return this.rowService.getRow( { id: Number(id)});
+  public getRow(@Param('id', ParseIntPipe) id: number): Promise<Row> {
+    return this.rowService.getRow( { id });
   }
 
 
@@ -67,9 +72,10 @@ export class RowController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Put(':id/sector/:seatId')
-  public addSector(@Param('id') id: string, @Param('seatId') seatId: string): Promise<Row> {
-    return this.rowService.addSeat({ id: Number(id)}, { seatNumber: Number(seatId) });
+  public addSector(@Param('id', ParseIntPipe) id: number, @Param('seatId', ParseIntPipe) seatId: number): Promise<Row> {
+    return this.rowService.addSeat({ id }, { seatNumber: seatId });
   }
 
 
@@ -88,8 +94,9 @@ export class RowController {
     status: 500,
     description: 'Internal Server Error'
   })
+  @Roles('admin')
   @Delete(':id')
-  public removeSeat(@Param('id') id: string): Promise<Row>{
-    return this.rowService.removeRow({ id: Number(id) });
+  public removeSeat(@Param('id', ParseIntPipe) id: number): Promise<Row>{
+    return this.rowService.removeRow({ id });
   }
 }
