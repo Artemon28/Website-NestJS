@@ -9,24 +9,9 @@ import { PrismaService } from "../Prisma/prisma.service";
 export class UserFactory {
   public async createFromCreateUserDto(createUserDto: CreateUserDto): Promise<User> {
     const prisma = new PrismaClient({})
-    if (createUserDto.name == null){
-      return await prisma.user.create({
-        data: {
-          id: createUserDto.id,
-          email: createUserDto.email,
-          password: createUserDto.password,
-        },
-      });
-    } else {
-      return await prisma.user.create({
-        data: {
-          id: createUserDto.id,
-          name: createUserDto.name,
-          email: createUserDto.email,
-          password: createUserDto.password,
-        },
-      });
-    }
+    return await prisma.user.create({
+      data: createUserDto,
+    })
   }
 }
 

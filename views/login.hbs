@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title>Login/out page</title>
+  {{>commonHeader}}
+  <link rel="stylesheet" href="CSS/login.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="JS/api-server.js"></script>
+</head>
+
+<body class="tickets-seller">
+<div id="wrap">
+  <header>
+      <div class="flex-header">
+          <img class="flex-logo" alt="лого гп России 2022" src="/content/GPlogo.png">
+          <nav class="flex-navigation">
+              <a class="nav-href" href="..">О нас</a>
+              <a class="nav-href" href="/tickets">Билеты</a>
+              <a class="nav-href" href="/account">Личный кабинет</a>
+              <a class="nav-href" href="/shoppingBag">Корзина</a>
+          </nav>
+      </div>
+
+    <div class="small-flex-header">
+      <a href=""><img class="nav-menu" src="/content/menu2.png"></a> <!--тут надо сделать всплывающее меню, пока не знаю как и не успеваю-->
+      <a href="https://sochiautodrom.ru/?_ga=2.213806032.512656409.1635086261-1029469700.1631815872">
+        <img class="flex-logo" alt="лого Sochi" src="/content/sochi.png"></a>
+    </div>
+  </header>
+
+  <main>
+    <div class="form">
+
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="signup">
+          <h1>Sign Up</h1>
+
+          <form>
+              <div class="field-wrap">
+                <input type="text" id="name" placeholder="First Name"/>
+              </div>
+
+            <div class="field-wrap">
+              <input type="email" name="email" id="email" required placeholder="Email Address *"/>
+            </div>
+
+            <div class="field-wrap">
+              <input type="password" name="password" id="password" required placeholder="Set A Password *"/>
+            </div>
+
+            <a href="#" class="btn btn-lg btn-primary" onclick="signUp()">Sign UP</a>
+          </form>
+
+        </div>
+
+        <div id="login">
+          <h1>Welcome Back!</h1>
+
+          <form action="/" method="post">
+
+            <div class="field-wrap">
+              <label>
+                Email Address<span class="req">*</span>
+              </label>
+              <input type="email"required autocomplete="off"/>
+            </div>
+
+            <div class="field-wrap">
+              <label>
+                Password<span class="req">*</span>
+              </label>
+              <input type="password"required autocomplete="off"/>
+            </div>
+
+            <button class="button button-block"/>Log In</button>
+
+          </form>
+
+        </div>
+
+      </div><!-- tab-content -->
+
+    </div> <!-- /form -->
+
+
+    <script src="JS/login.js"></script>
+  </main>
+</div>
+</body>
+</html>
