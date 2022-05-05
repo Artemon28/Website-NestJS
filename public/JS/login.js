@@ -62,8 +62,8 @@ async function signUp() {
 }
 
 async function signIn() {
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
+  var email = document.getElementById('emailIn').value;
+  var password = document.getElementById('passwordIn').value;
 
   const user = {
     "formFields": [
