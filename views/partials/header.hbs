@@ -1,5 +1,6 @@
 <header>
   <script src="/JS/handlebars.js"></script>
+  <script src="/JS/login.js"></script>
   <div id="header-block"></div>
   <script id="header-template" type="text/x-handlebars-template">
       <div class="flex-header">
@@ -13,9 +14,7 @@
           {{#if username}}
               <div class="authorization-div">
                   <p>Logged in as {{username}}</p>
-                  <button class="authorization-button">
-                      Log Out
-                  </button>
+                  <a href="#" class="btn btn-lg btn-primary authorization-button" onclick="logout()">Log Out</a>
               </div>
           {{else}}
             <div class="authorization-div">
@@ -29,7 +28,7 @@
                   Login
               </button>
               <form action="/login">
-                <button>Зарегестрироваться</button>
+                <button>Войти</button>
               </form>
             </div>
           {{/if}}

@@ -4,12 +4,13 @@ import {
   NestModule,
   DynamicModule,
 } from '@nestjs/common';
+
 import { AuthMiddleware } from './auth.middleware';
 import { ConfigInjectionToken, AuthModuleConfig } from './config.interface';
-import { SupertokensService } from './supertokens/supertokens.service';
+import { SupertokensService } from "./supertokens/supertokens.service";
 
 @Module({
-  providers: [],
+  providers: [SupertokensService],
   exports: [],
   controllers: [],
 })
@@ -21,7 +22,6 @@ export class AuthModule implements NestModule {
   static forRoot({ connectionURI, apiKey, appInfo }: AuthModuleConfig): DynamicModule {
     return {
       providers: [
-        SupertokensService,
         {
           useValue: {
             appInfo,

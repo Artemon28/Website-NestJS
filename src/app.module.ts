@@ -9,6 +9,7 @@ import { SeatModule } from './seat/seat.module';
 import { RowModule } from './row/row.module';
 import { PrismaModule } from "./Prisma/prisma.module";
 import { AuthModule } from './auth/auth.module';
+import { SupertokensService } from "./auth/supertokens/supertokens.service";
 
 @Module({
   imports: [
@@ -18,12 +19,13 @@ import { AuthModule } from './auth/auth.module';
       connectionURI: "https://788e80b1cbef11ec964f014fe604f8e7-eu-west-1.aws.supertokens.io:3567",
       apiKey: "yWF2-l0=sJqKStBfo7QiCHvnM50oR7",
       appInfo: {
-        // Learn more about this on https://supertokens.com/docs/thirdpartyemailpassword/appinfo
+        // Learn more about this on https://supertokens.com/docs/emailpassword/appinfo
         appName: "artemonweb2",
         apiDomain: "http://localhost:12345",
         websiteDomain: "http://localhost:12345",
       },
-    }),],
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

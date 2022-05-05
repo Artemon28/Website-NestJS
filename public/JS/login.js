@@ -25,14 +25,21 @@ async function signUp() {
   }
 
   const user = {
-    name: name,
-    email: email,
-    password: password,
+    "formFields": [
+      {
+        "id": "email",
+        "value": email,
+      },
+      {
+        "id": "password",
+        "value": password,
+      }
+    ]
   };
 
   event.preventDefault();
   try {
-    const response = await fetch('http://localhost:12345/auth/signup', {
+    const response = await fetch('/auth/signup', {
       method: 'POST',
       headers: {
         "Accept": "application/json",
@@ -73,7 +80,7 @@ async function signIn() {
 
   event.preventDefault();
   try {
-    const response = await fetch('/api/auth/signIn', {
+    const response = await fetch('/auth/signIn', {
       method: 'POST',
       headers: {
         "Accept": "application/json",
@@ -95,9 +102,10 @@ async function signIn() {
   }
 }
 
+
 async function logout() {
   try {
-    const response = await fetch('/api/auth/logout', {
+    const response = await fetch('/logout', {
       method: 'POST',
     });
 
@@ -107,7 +115,7 @@ async function logout() {
       }
     }
 
-    window.location.href = "/about";
+    window.location.href = "/";
   } catch (error) {
     console.error(error);
     alert(`Не удалось выйти:\n${error}`);

@@ -1,4 +1,4 @@
-import { Controller, Get, Render, Session, UseGuards, UseInterceptors } from "@nestjs/common";
+import { Controller, Get, Post, Render, Session, UseGuards, UseInterceptors } from "@nestjs/common";
 import { TimeInterceptor } from './time.interceptor';
 import { NameInterceptor } from "./name.interceptor";
 import { AuthGuard } from "./auth/auth.guard";
@@ -40,5 +40,13 @@ export class AppController {
   async getTest(@Session() session: SessionContainer): Promise<string> {
     // TODO: magic
     return "magic";
+  }
+
+  @Post('logout')
+  @UseGuards(AuthGuard)
+  async postLogout(@Session() session: SessionContainer): Promise<string> {
+    await session.revokeSession();
+
+    return "Success! User session revoked";
   }
 }

@@ -62,24 +62,16 @@
         <div id="login">
           <h1>Welcome Back!</h1>
 
-          <form action="/" method="post">
-
+          <form>
             <div class="field-wrap">
-              <label>
-                Email Address<span class="req">*</span>
-              </label>
-              <input type="email"required autocomplete="off"/>
+              <input type="email" name="email" id="email" required placeholder="Email Address *"/>
             </div>
 
             <div class="field-wrap">
-              <label>
-                Password<span class="req">*</span>
-              </label>
-              <input type="password"required autocomplete="off"/>
+              <input type="password" name="password" id="password" required placeholder="Set A Password *"/>
             </div>
 
-            <button class="button button-block"/>Log In</button>
-
+            <a href="#" class="btn btn-lg btn-primary" onclick="signIn()">Sign IN</a>
           </form>
 
         </div>
