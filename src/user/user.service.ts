@@ -49,9 +49,9 @@ export class UserService {
     throw new NotImplementedException();
   }
 
-  public buyTicket(
+  public addTicket(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
-    ticket: Ticket,
+    ticketWhereUniqueInput: Prisma.TicketWhereUniqueInput
   ): Promise<User | null> {
     throw new NotImplementedException();
   }

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from '@prisma/client'
 import { Ticket } from '@prisma/client'
@@ -70,8 +70,8 @@ export class UserController {
     description: 'Internal Server Error'
   })
   @Put(':id')
-  public addUserName(@Param('id') id: string, @Body() creatUserDto: CreateUserDto): Promise<User> {
-    return this.userService.addUserName({ id: Number(id) }, creatUserDto);
+  public addUserName(@Param('id', ParseIntPipe) id: number, @Body() updateUserDto: CreateUserDto): Promise<User> {
+    return this.userService.addUserName({ id }, updateUserDto);
   }
 
 
@@ -90,9 +90,9 @@ export class UserController {
     status: 500,
     description: 'Internal Server Error'
   })
-  @Put('/:id/ticket')
-  public addTicket(@Param('id') id: string, ticket: Ticket): Promise<User> {
-    return this.userService.buyTicket({ id: Number(id) }, ticket);
+  @Put('/:id/ticket/:ticketId')
+  public addTicket(@Param('id', ParseIntPipe) id: number, @Param('ticketId') ticket: string): Promise<User> {
+    return this.userService.addTicket({ id }, { id: Number(ticket) });
   }
 
 
