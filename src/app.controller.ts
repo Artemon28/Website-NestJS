@@ -1,18 +1,33 @@
-import { Controller, Get, Post, Render, Session, UseGuards, UseInterceptors } from "@nestjs/common";
+import { Controller, Get, Post, Render, UseGuards, UseInterceptors, Request, Response } from "@nestjs/common";
 import { TimeInterceptor } from './time.interceptor';
 import { NameInterceptor } from "./name.interceptor";
 import { AuthGuard } from "./auth/auth.guard";
 import { SessionContainer } from "supertokens-node/lib/build/recipe/session/faunadb";
+import { AppService } from "./app.service";
+import { SessionRequest } from "supertokens-node/framework/express";
+import { Session } from './auth/session.decorator';
+
 
 @Controller()
+
 @UseInterceptors(TimeInterceptor)
 export class AppController {
-  @UseInterceptors(NameInterceptor)
+
+  constructor(
+    private readonly appService: AppService,
+  ) {}
+
   @Get()
+  @UseInterceptors(NameInterceptor)
   @Render('index')
-  getIndexPage() {
-    return {};
+  async getIndexPage(){
+    return{}
   }
+  // async getIndexPage(@Request() req: SessionRequest, @Session() session: Session, @Response({passthrough: true}) res: Response) {
+  //   const username = await this.appService.isAuth(session);
+  //   return {username: username};
+  // }
+
   @UseInterceptors(NameInterceptor)
   @Get('account')
   @Render('account')

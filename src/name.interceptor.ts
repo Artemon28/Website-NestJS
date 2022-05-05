@@ -1,9 +1,9 @@
 import {
   CallHandler,
-  ExecutionContext,
+  ExecutionContext, Get,
   Injectable,
-  NestInterceptor,
-} from '@nestjs/common';
+  NestInterceptor, Session
+} from "@nestjs/common";
 import { map, Observable } from 'rxjs';
 
 export interface Response {
@@ -16,6 +16,6 @@ export class NameInterceptor implements NestInterceptor {
     context: ExecutionContext,
     next: CallHandler,
   ): Observable<Response> {
-    return next.handle().pipe(map((response) => ({ ...response, username: "Artemon28"})));
+    return next.handle().pipe(map((response) => ({ ...response})));
   }
 }
