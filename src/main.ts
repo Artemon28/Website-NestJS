@@ -4,7 +4,6 @@ import { join } from 'path';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { TimeInterceptor } from "./time.interceptor";
-import { NameInterceptor } from "./name.interceptor";
 import supertokens from "supertokens-node";
 import { SupertokensExceptionFilter } from "./auth/auth.filter";
 

@@ -295,3 +295,15 @@ footer {
     display: flex;
     align-items: center;
 }
+
+.authorization-div1{
+    display: none;
+    align-items: center;
+}
+
+.signInButton{
+    background-color: #DECDA5;
+    border-radius: 5px;
+    height: 2em;
+    cursor: pointer;
+}

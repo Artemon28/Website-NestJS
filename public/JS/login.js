@@ -102,7 +102,6 @@ async function signIn() {
   }
 }
 
-
 async function logout() {
   try {
     const response = await fetch('/logout', {
@@ -121,6 +120,7 @@ async function logout() {
     alert(`Не удалось выйти:\n${error}`);
   }
 }
+
 
 function hasNumber(inputString) {
   return /\d/.test(inputString);
