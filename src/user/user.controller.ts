@@ -52,31 +52,31 @@ export class UserController {
   })
   @Get(':id')
   public getUser(@Param('id') id: string): Promise<User> {
-    return this.userService.getUser( { id: Number(id) });
+    return this.userService.getUser( { id: id });
   }
 
 
-  @ApiCookieAuth()
-  @UseGuards(AuthGuard)
-  @ApiOperation({
-    summary: 'Add name of user'
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'the user name has been successfully updated'
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'no user with this id number'
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'Internal Server Error'
-  })
-  @Put(':id')
-  public async addUserName(@Session() session: SessionContainer, @Param('id') id: number, @Body() creatUserDto: CreateUserDto): Promise<User> {
-    return this.userService.addUserName({ id }, { creatUserDto})
-  };
+  // @ApiCookieAuth()
+  // @UseGuards(AuthGuard)
+  // @ApiOperation({
+  //   summary: 'Add name of user'
+  // })
+  // @ApiResponse({
+  //   status: 200,
+  //   description: 'the user name has been successfully updated'
+  // })
+  // @ApiResponse({
+  //   status: 404,
+  //   description: 'no user with this id number'
+  // })
+  // @ApiResponse({
+  //   status: 500,
+  //   description: 'Internal Server Error'
+  // })
+  // @Put(':id')
+  // public async addUserName(@Session() session: SessionContainer, @Param('id') id: string, @Body() creatUserDto: CreateUserDto): Promise<User> {
+  //   return this.userService.addUserName({ id }, { creatUserDto})
+  // };
 
 
   @ApiOperation({
@@ -96,7 +96,7 @@ export class UserController {
   })
   @Put('/:id/ticket')
   public addTicket(@Param('id') id: string, ticket: Ticket): Promise<User> {
-    return this.userService.buyTicket({ id: Number(id) }, ticket);
+    return this.userService.buyTicket({ id: id }, ticket);
   }
 
 
@@ -116,7 +116,7 @@ export class UserController {
     description: 'Internal Server Error'
   })
   @Delete()
-  public removeUser(id: number): Promise<User>{
+  public removeUser(id: string): Promise<User>{
     return this.userService.removeUser(id);
   }
 }

@@ -7,7 +7,7 @@ window.onload = async function doesSessionExist() {
       method: 'GET',
     });
     if (response.statusText !== "OK") {
-      throw new Error(`Failed to sign in user: ${response.statusText}`);
+      throw new Error(`Failed to define a user session: ${response.statusText}`);
     }
 
     let userEmail = await response.json();
@@ -24,6 +24,6 @@ window.onload = async function doesSessionExist() {
     logged.style.display = "none";
     unlogged.style.display = "flex";
     console.error(error);
-    alert(`Не удалось выйти:\n${error}`);
+    alert(`Невозможно определить сессию пользователя\n${error}`);
   }
 }

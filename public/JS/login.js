@@ -24,6 +24,11 @@ async function signUp() {
     return;
   }
 
+  if (!validateEmail(email)){
+    alert("Введен неправильный формат для поля email");
+    return;
+  }
+
   const user = {
     "formFields": [
       {
@@ -53,6 +58,25 @@ async function signUp() {
     if (response.status >= 300) {
       throw new Error(`Failed to sign up user: ${response.statusText}`);
     }
+
+    let userInfo = await response.json();
+
+    const userDB = {
+      "name": name,
+      "email": email,
+      "id": userInfo.user.id
+    };
+
+    const responseFromDb = await fetch('/user',{
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      mode: "same-origin",
+      body: JSON.stringify(userDB),
+    })
 
     window.location.href = "/";
   } catch (error) {
@@ -128,4 +152,9 @@ function hasNumber(inputString) {
 
 function hasLetters(inputString) {
   return /[^a-zA-Z]/.test(inputString);
+}
+
+function validateEmail(email) {
+  let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return pattern .test(String(email).toLowerCase());
 }
