@@ -26,7 +26,7 @@ const app = new Vue({
     }
   },
   created() {
-    this.socket = io('http://localhost:12345') //location.href
+    this.socket = io(location.origin) //http://localhost:12345
     this.socket.on('msgToClient', (message) => {
       this.receivedMessage(message)
     })
