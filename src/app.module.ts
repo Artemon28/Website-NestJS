@@ -9,6 +9,7 @@ import { SeatModule } from './seat/seat.module';
 import { RowModule } from './row/row.module';
 import { PrismaModule } from "./Prisma/prisma.module";
 import { AuthModule } from './auth/auth.module';
+import { EventsGateway } from "./events/events.gateway";
 
 @Module({
   imports: [
@@ -26,6 +27,6 @@ import { AuthModule } from './auth/auth.module';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, EventsGateway],
 })
 export class AppModule {}
