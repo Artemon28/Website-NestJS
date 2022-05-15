@@ -52,7 +52,7 @@ export class UserController {
   })
   @Roles('admin')
   @Get(':id')
-  public getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
+  public getUser(@Param('id') id: string): Promise<User> {
     return this.userService.getUser({ id });
   }
 
@@ -73,7 +73,7 @@ export class UserController {
   })
   @Roles('AuthUser')
   @Put(':id')
-  public addUserName(@Param('id', ParseIntPipe) id: number, @Body() updateUserDto: UpdateUserDto): Promise<User> {
+  public addUserName(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
     return this.userService.addUserName({ id }, updateUserDto);
   }
 
@@ -94,7 +94,7 @@ export class UserController {
   })
   @Roles('AuthUser')
   @Put('/:id/ticket/:ticketId')
-  public addTicket(@Param('id', ParseIntPipe) id: number, @Param('ticketId') ticket: string): Promise<User> {
+  public addTicket(@Param('id') id: string, @Param('ticketId') ticket: string): Promise<User> {
     return this.userService.addTicket({ id }, { id: Number(ticket) });
   }
 
@@ -115,7 +115,7 @@ export class UserController {
   })
   @Roles('AuthUser')
   @Delete(':id')
-  public removeUser(@Param('id', ParseIntPipe) id: number): Promise<User>{
+  public removeUser(@Param('id') id: string): Promise<User>{
     return this.userService.removeUser({ id });
   }
 }

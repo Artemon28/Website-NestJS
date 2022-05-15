@@ -11,10 +11,10 @@ datasource db {
 }
 
 model User{
-    id        Int     @default(autoincrement()) @id
+    id        String  @id
     email     String  @unique
     name      String?
-    password  String
+    role      String?
     tickets    Ticket[]
 }
 
@@ -25,7 +25,7 @@ model Ticket{
     seat      Seat?
     cost      Int
     user      User?  @relation(fields: [userid], references: [id])
-    userid    Int?
+    userid    String?
 }
 
 model Tribune{
@@ -43,13 +43,14 @@ model Sector{
 
 model Row{
     id        Int     @default(autoincrement()) @id
+    rowNumber Int
     seats     Seat[]
     sector    Sector? @relation(fields: [sectorid], references: [id])
     sectorid  Int?
 }
 
 model Seat{
-     seatNumber  Int  @default(autoincrement()) @id
+     seatNumber  Int  @unique
      ticket      Ticket? @relation(fields: [ticketid], references: [id])
      ticketid    Int?
      row         Row?  @relation(fields: [rowid], references: [id])

@@ -8,7 +8,7 @@ export class CreateUserDto {
   @IsEmail()
   readonly email: string
   @ApiProperty()
-  readonly password: string
+  readonly id: string
 }
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {

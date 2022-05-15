@@ -8,9 +8,7 @@ export class SeatFactory {
   public async createFromCreateSeatDto(createSeatDto: CreateSeatDto): Promise<Seat> {
     const prisma = new PrismaClient({})
     return await prisma.seat.create({
-      data: {
-        isAvailable: false,
-      },
+      data: createSeatDto,
     });
   }
 }
