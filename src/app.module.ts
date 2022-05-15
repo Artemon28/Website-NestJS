@@ -10,10 +10,11 @@ import { RowModule } from './row/row.module';
 import { PrismaModule } from "./Prisma/prisma.module";
 import { AuthModule } from './auth/auth.module';
 import { EventsGateway } from "./events/events.gateway";
+import { ChatModule } from "./chat/chat.module";
 
 @Module({
   imports: [
-    TicketModule, TribuneModule, UserModule, SectorModule, SeatModule, RowModule, PrismaModule,
+    TicketModule, TribuneModule, UserModule, SectorModule, SeatModule, RowModule, PrismaModule, ChatModule,
     AuthModule.forRoot({
       // These are the connection details of the app you created on supertokens.com
       connectionURI: "https://788e80b1cbef11ec964f014fe604f8e7-eu-west-1.aws.supertokens.io:3567",

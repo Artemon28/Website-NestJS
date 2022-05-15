@@ -31,13 +31,13 @@ export class UserService {
     throw new NotImplementedException();
   }
 
-  async addUserName(id: { id: number }, userDto: { creatUserDto: CreateUserDto }): Promise<User> | null {
+  async addUserName(id: string , userDto: { creatUserDto: CreateUserDto }): Promise<User> | null {
     return await this.prisma.user.update({
       data: {
         ...userDto,
       },
       where: {
-        id: Number(id),
+        id: id,
       },
     });
   }
@@ -56,7 +56,7 @@ export class UserService {
     throw new NotImplementedException();
   }
 
-  public removeUser(id: number): Promise<User> {
+  public removeUser(id: string): Promise<User> {
     throw new NotImplementedException();
   }
 }
