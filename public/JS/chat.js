@@ -55,11 +55,13 @@ const app = new Vue({
 
     const arrayRec = await allRec.json();
 
-    for (var i = 0; i < 51; i++) {
+    for (obj in arrayRec){
       const message = {
-        name: arrayRec[i].name,
-        text: arrayRec[i].value,
+        name: arrayRec[obj].name,
+        text: arrayRec[obj].value,
       }
+      if (obj === 'data')
+        continue;
       this.receivedMessage(message)
     }
 

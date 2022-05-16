@@ -19,8 +19,8 @@ async function signUp() {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
 
-  if (password.length < 8 || !hasNumber(password) || !hasLetters(password)) {
-    alert("Пароль должен содержать буквы и цифры и иметь длину не менее 8 символов");
+  if (password.length < 8 || !hasNumber(password) || !hasLetters(password) || password == password.toLowerCase()) {
+    alert("Пароль должен содержать буквы, цифры, иметь длину не менее 8 символов и содержать Заглавную букву");
     return;
   }
 

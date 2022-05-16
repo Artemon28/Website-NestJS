@@ -30,14 +30,6 @@ export class ChatService {
   }
 
   public getAllRecords(): Promise<ChatHistory[]> {
-    const yes = this.prisma.chatHistory.findMany({
-      where: {
-        id: {
-          gt: 0,
-        },
-      }
-    })
-    console.log("hello");
-    return yes;
+    return this.prisma.chatHistory.findMany({});
   }
 }
