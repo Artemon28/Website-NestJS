@@ -19,7 +19,7 @@ async function signUp() {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
 
-  if (password.length < 8 || !hasNumber(password) || !hasLetters(password)) {
+  if (password.length < 8 || !hasNumber(password) || !hasLetters(password) || password == password.toLowerCase()) {
     alert("Пароль должен содержать буквы и цифры и иметь длину не менее 8 символов");
     return;
   }
@@ -57,6 +57,12 @@ async function signUp() {
 
     if (response.status >= 300) {
       throw new Error(`Failed to sign up user: ${response.statusText}`);
+    }
+
+    let userEmail = await response.json();
+
+    if (!userEmail.user.email) {
+      throw new Error(`Can't sign up: ${userEmail.status}`);
     }
 
     let userInfo = await response.json();
@@ -117,6 +123,12 @@ async function signIn() {
 
     if (response.statusText !== "OK") {
       throw new Error(`Failed to sign in user: ${response.statusText}`);
+    }
+
+    let userEmail = await response.json();
+
+    if (!userEmail.email) {
+      throw new Error(`Wrong login or password, error: ${userEmail.status}`);
     }
 
     window.location.href = "/";
