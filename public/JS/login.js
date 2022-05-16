@@ -95,6 +95,13 @@ async function signIn() {
       throw new Error(`Failed to sign in user: ${response.statusText}`);
     }
 
+    let userEmail = await response.json();
+
+    if (!userEmail.email) {
+      throw new Error(`Wrong login or password, error: ${userEmail.status}`);
+    }
+
+
     window.location.href = "/";
   } catch (error) {
     console.error(error);
