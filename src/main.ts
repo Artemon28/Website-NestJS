@@ -12,16 +12,16 @@ async function bootstrap() {
     AppModule,
   );
   app.enableCors({
-    origin: ['http://localhost:12345/'],
+    origin: ['https://artemonweb2.herokuapp.com/'],
     allowedHeaders: ['content-type', ...supertokens.getAllCORSHeaders()],
     credentials: true,
   });
   app.useGlobalFilters(new SupertokensExceptionFilter());
   app.useGlobalInterceptors(new TimeInterceptor());
-  app.useStaticAssets(join(__dirname, '../../', 'public'));
-  app.setBaseViewsDir(join(__dirname, '../../', 'views'));
+  app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.setBaseViewsDir(join(__dirname, '..', 'views'));
   const hbs = require('hbs');
-  hbs.registerPartials(join(__dirname, '../../', 'views/partials'));
+  hbs.registerPartials(join(__dirname, '..', 'views/partials'));
   app.setViewEngine('hbs');
 
   const options = new DocumentBuilder().addCookieAuth('optional-session-id');
