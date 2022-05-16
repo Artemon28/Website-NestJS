@@ -54,6 +54,12 @@ async function signUp() {
       throw new Error(`Failed to sign up user: ${response.statusText}`);
     }
 
+    let userEmail = await response.json();
+
+    if (!userEmail.user.email) {
+      throw new Error(`Can't sign up: ${userEmail.status}`);
+    }
+
     window.location.href = "/";
   } catch (error) {
     console.error(error);
