@@ -12,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
 import { EventsGateway } from "./events/events.gateway";
 import { ChatModule } from "./chat/chat.module";
 
+
 @Module({
   imports: [
     TicketModule, TribuneModule, UserModule, SectorModule, SeatModule, RowModule, PrismaModule, ChatModule,
