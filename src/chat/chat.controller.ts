@@ -1,5 +1,5 @@
 import { ChatService } from "./chat.service";
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { ChatHistory } from "@prisma/client";
 import { CreateChatDto } from "./create-chat.dto";
@@ -20,5 +20,10 @@ export class ChatController {
   @Get(':id')
   public returnAllRec(@Param('id') id: string): Promise<ChatHistory[]> {
     return this.chatService.getAllRecords();
+  }
+
+  @Delete()
+  public eraseLatset(): Promise<ChatHistory>{
+    return this.chatService.delLatest();
   }
 }

@@ -9,8 +9,16 @@ export class ChatService {
   constructor(private prisma: PrismaService) {}
 
   public async create(dto: CreateChatDto): Promise<ChatHistory> {
+    return this.prisma.chatHistory.create({ data: dto });
+  }
+
+  public getAllRecords(): Promise<ChatHistory[]> {
+    return this.prisma.chatHistory.findMany({});
+  }
+
+  public async delLatest(): Promise<ChatHistory> {
     const recQty = await this.prisma.chatHistory.count();
-    if (recQty > 50){
+    if (recQty > 50) {
       const latestRec = await this.prisma.chatHistory.findFirst({
         where: {
           id: {
@@ -22,14 +30,9 @@ export class ChatService {
         },
       });
 
-      this.prisma.chatHistory.delete({
-        where: {id: Number(latestRec.id)}
+      return this.prisma.chatHistory.delete({
+        where: { id: Number(latestRec.id) }
       })
     }
-    return this.prisma.chatHistory.create({ data: dto });
-  }
-
-  public getAllRecords(): Promise<ChatHistory[]> {
-    return this.prisma.chatHistory.findMany({});
   }
 }

@@ -30,6 +30,10 @@ const app = new Vue({
           body: JSON.stringify(chatRecord),
         })
 
+        fetch('/chat',{
+          method: 'DELETE'
+        })
+
         this.socket.emit('msgToServer', message)
         this.text = ''
       }
