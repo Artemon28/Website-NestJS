@@ -100,4 +100,10 @@ export class SectorController {
   public deleteSector(@Param('id', ParseIntPipe) id: number): Promise<Sector> {
     return this.sectorService.deleteSector({ id });
   }
+
+
+  @Get(':id/rowNumber/:rowId')
+  public getRow(@Param('id', ParseIntPipe) id: number, @Param('rowId', ParseIntPipe) rowId: number) {
+    return this.sectorService.getRow({id}, rowId);
+  }
 }

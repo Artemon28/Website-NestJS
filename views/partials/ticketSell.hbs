@@ -1,7 +1,17 @@
 <div class="photo-gallery">
-  <div class="flex-gallery">
-    <div class="ticket">Крутой богатый билет</div>
-    <div class="ticket">Средний билет для народа</div>
-    <div class="ticket">Свободное размещение для остальных</div>
-  </div>
+  <form action="" onsubmit="buyTicketT1()">
+    <div class="field-wrap">
+      <input type="number" name="sectorNumber" id="sectorNumber" placeholder="Enter sector number"/>
+    </div>
+
+    <div class="field-wrap">
+      <input type="number" name="RowNumber" id="rowNumber" required placeholder="Enter a row number"/>
+    </div>
+
+    <div class="field-wrap">
+      <input type="number" name="SeatNumber" id="seatNumber" required placeholder="Enter a seat number"/>
+    </div>
+
+    <a href="#" class="btn btn-lg btn-primary" onclick="buyTicketT1()">Buy Ticket</a>
+  </form>
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Prisma, PrismaClient, Tribune } from "@prisma/client";
+import { Prisma, PrismaClient, Sector, Tribune } from "@prisma/client";
 import { CreateTribuneDto } from "./dto/create-tribune.dto";
 import { PrismaService } from "../Prisma/prisma.service";
 
@@ -42,4 +42,14 @@ export class TribuneService {
         where: tribuneWhereUniqueInput,
       });
     }
+
+  public async getSector(
+    tribuneWhereUniqueInput: Prisma.TribuneWhereUniqueInput,
+    secId: number,
+  ): Promise<Sector> {
+    const sectors: Sector[] = await this.prisma.tribune.findUnique({
+      where: tribuneWhereUniqueInput,
+    }).sectors()
+    return sectors[secId - 1];
+  }
 }

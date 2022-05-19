@@ -99,4 +99,10 @@ export class RowController {
   public removeSeat(@Param('id', ParseIntPipe) id: number): Promise<Row>{
     return this.rowService.removeRow({ id });
   }
+
+
+  @Get(':id/seatNumber/:seatId')
+  public getSeat(@Param('id', ParseIntPipe) id: number, @Param('seatId', ParseIntPipe) seatId: number) {
+    return this.rowService.getSeat({id}, seatId);
+  }
 }

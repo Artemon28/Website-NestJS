@@ -74,4 +74,9 @@ export class TribuneController {
   public getTribune(@Param('id', ParseIntPipe) id: number): Promise<Tribune> {
     return this.tribuneService.getTribune( { id });
   }
+
+  @Get(':id/sectorNumber/:secId')
+  public getSector(@Param('id', ParseIntPipe) id: number, @Param('secId', ParseIntPipe) secId: number) {
+    return this.tribuneService.getSector({id}, secId);
+  }
 }

@@ -7,9 +7,7 @@ import { PrismaService } from "../prisma.service";
 export class SeatFactory {
   public async createFromCreateSeatDto(createSeatDto: CreateSeatDto): Promise<Seat> {
     const prisma = new PrismaClient({})
-    return await prisma.seat.create({
-      data: createSeatDto,
-    });
+    return await prisma.seat.create({data: {}});
   }
 }
 

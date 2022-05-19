@@ -10,12 +10,6 @@ export class SectorFactory {
   public async createFromCreateSectorDto(createSectorDto: CreateSectorDto): Promise<Sector> {
     const prisma = new PrismaClient({})
     return await prisma.sector.create({data: {}});
-    // return await prisma.sector.create({
-    //   data: {
-    //     tribuneid: createSectorDto.tribuneId,
-    //     id: createSectorDto.tribuneId,
-    //   },
-    // });
   }
 }
 
@@ -53,5 +47,15 @@ export class SectorService {
     return this.prisma.sector.delete({
       where: sectorWhereUniqueInput,
     });
+  }
+
+  public async getRow(
+    sectorWhereUniqueInput: Prisma.SectorWhereUniqueInput,
+    rowId: number,
+  ): Promise<Row> {
+    const rows: Row[] = await this.prisma.sector.findUnique({
+      where: sectorWhereUniqueInput,
+    }).rows()
+    return rows[rowId - 1];
   }
 }
