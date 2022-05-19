@@ -1,8 +1,8 @@
 import { ChatService } from "./chat.service";
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { ChatHistory } from "@prisma/client";
 import { CreateChatDto } from "./create-chat.dto";
+import { ChatHistory } from "@prisma/client";
 
 @ApiTags('Chat')
 @Controller('/chat')
