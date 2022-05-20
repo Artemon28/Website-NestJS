@@ -20,7 +20,7 @@ async function signUp() {
   var password = document.getElementById('password').value;
 
   if (password.length < 8 || !hasNumber(password) || !hasLetters(password) || password == password.toLowerCase()) {
-    alert("Пароль должен содержать буквы и цифры и иметь длину не менее 8 символов");
+    alert("Пароль должен содержать буквы, цифры, иметь длину не менее 8 символов и содержать Заглавную букву");
     return;
   }
 
@@ -127,9 +127,10 @@ async function signIn() {
 
     let userEmail = await response.json();
 
-    if (!userEmail.email) {
+    if (!userEmail.user.email) {
       throw new Error(`Wrong login or password, error: ${userEmail.status}`);
     }
+
 
     window.location.href = "/";
   } catch (error) {

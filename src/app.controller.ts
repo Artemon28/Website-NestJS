@@ -40,14 +40,10 @@ export class AppController {
   getLogin() {
     return {};
   }
-
-  @Get('test')
-  @UseGuards(AuthGuard)
-  async getTest(@Session() session: SessionContainer): Promise<string> {
-    const role = session.getAccessTokenPayload()["role"]
-    if (role == "admin")
-      return "wow, that's admin"
-    return "magic";
+  @Get('chat')
+  @Render('chat')
+  getChat() {
+    return {};
   }
 
   @Post('logout')
@@ -67,17 +63,6 @@ export class AppController {
     } else {
       return "";
     }
-  }
-
-
-  @Post('example')
-  @UseGuards(AuthGuard)
-  async postExample(@Session() session: SessionContainer): Promise<boolean> {
-    let role = "admin";
-    await session.updateAccessTokenPayload(
-      {role}
-    );
-    return true;
   }
 
 }

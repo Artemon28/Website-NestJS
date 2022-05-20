@@ -50,10 +50,16 @@ model Row{
 }
 
 model Seat{
-     seatNumber  Int  @unique
+     seatNumber  Int  @default(autoincrement()) @id
      ticket      Ticket? @relation(fields: [ticketid], references: [id])
      ticketid    Int?
      row         Row?  @relation(fields: [rowid], references: [id])
      rowid       Int?
      isAvailable Boolean @default(true)
  }
+
+model  ChatHistory{
+    id      Int     @default(autoincrement()) @id
+    name    String
+    value   String
+}

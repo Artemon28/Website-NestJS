@@ -307,3 +307,13 @@ footer {
     height: 2em;
     cursor: pointer;
 }
+
+
+#messages{
+    height:300px;
+    overflow-y: scroll;
+}
+
+#chat {
+    margin-top: 2rem;
+}

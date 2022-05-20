@@ -31,16 +31,16 @@ export class UserService {
     throw new NotImplementedException();
   }
 
-  // async addUserName(id: { id: string }, userDto: { creatUserDto: CreateUserDto }): Promise<User> | null {
-  //   return await this.prisma.user.update({
-  //     data: {
-  //       ...userDto,
-  //     },
-  //     where: {
-  //       id: id,
-  //     },
-  //   });
-  // }
+  async addUserName(id: string , userDto: { creatUserDto: CreateUserDto }): Promise<User> | null {
+    return await this.prisma.user.update({
+      data: {
+        ...userDto,
+      },
+      where: {
+        id: id,
+      },
+    });
+  }
 
   public buyTicket(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,

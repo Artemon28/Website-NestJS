@@ -35,6 +35,8 @@ export class UserController {
   }
 
 
+  @ApiCookieAuth()
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Get user'
   })
@@ -56,29 +58,31 @@ export class UserController {
   }
 
 
-  // @ApiCookieAuth()
-  // @UseGuards(AuthGuard)
-  // @ApiOperation({
-  //   summary: 'Add name of user'
-  // })
-  // @ApiResponse({
-  //   status: 200,
-  //   description: 'the user name has been successfully updated'
-  // })
-  // @ApiResponse({
-  //   status: 404,
-  //   description: 'no user with this id number'
-  // })
-  // @ApiResponse({
-  //   status: 500,
-  //   description: 'Internal Server Error'
-  // })
-  // @Put(':id')
-  // public async addUserName(@Session() session: SessionContainer, @Param('id') id: string, @Body() creatUserDto: CreateUserDto): Promise<User> {
-  //   return this.userService.addUserName({ id }, { creatUserDto})
-  // };
+  @ApiCookieAuth()
+  @UseGuards(AuthGuard)
+  @ApiOperation({
+    summary: 'Add name of user'
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'the user name has been successfully updated'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'no user with this id number'
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error'
+  })
+  @Put(':id')
+  public async addUserName(@Session() session: SessionContainer, @Param('id') id: string, @Body() creatUserDto: CreateUserDto): Promise<User> {
+    return this.userService.addUserName(id, { creatUserDto})
+  };
 
 
+  @ApiCookieAuth()
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'User buying ticket'
   })
@@ -100,6 +104,8 @@ export class UserController {
   }
 
 
+  @ApiCookieAuth()
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Delete this user'
   })
