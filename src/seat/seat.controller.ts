@@ -51,11 +51,11 @@ export class SeatController {
     description: 'Internal Server Error'
   })
   @Roles('admin')
-  @Put('/reserve/:seatNumber')
+  @Put(':seatNumber/reserve')
   public reserveSeat(@Param('seatNumber', ParseIntPipe) seatNumber: number): Promise<Seat>{
     return this.seatService.reserve({
       where: { seatNumber },
-      data: { isAvailable: true },
+      data: { isAvailable: false },
     });
   }
 
@@ -75,11 +75,11 @@ export class SeatController {
     description: 'Internal Server Error'
   })
   @Roles('admin')
-  @Put('/unreserve/:seatNumber')
+  @Put(':seatNumber/unreserve')
   public unReserveSeat(@Param('seatNumber', ParseIntPipe) seatNumber: number): Promise<Seat>{
     return this.seatService.reserve({
       where: { seatNumber },
-      data: { isAvailable: false },
+      data: { isAvailable: true },
     });
   }
 

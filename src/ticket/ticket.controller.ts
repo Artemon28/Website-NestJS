@@ -30,7 +30,7 @@ export class TicketController {
     description: 'Internal Server Error'
   })
   @Roles('AuthUser')
-  @Post('ticket/seat/:seatNumber')
+  @Post('/seat/:seatNumber')
   public createTicket(@Body() dto: CreateTicketDto, @Param('seatNumber') seatNumber: string): Promise<Ticket>{
     return this.ticketService.create(dto, {seatNumber: Number(seatNumber)});
   }

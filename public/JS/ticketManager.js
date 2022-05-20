@@ -17,23 +17,12 @@ async function buyTicketT1() {  //T1 mean that tribune is # 1
   const seatJSON = await seat.json();
 
   const ticketForm = {
-    "formFields": [
-      {
-        "id": "name",   //в 6ой лабе взять имя от пользователя из сессии, все дела
-        "value": "Name",
-      },
-      {
-        "id": "cost",
-        "value": 1000,   //По идее цена заложена в сектор, TODO
-      },
-      {
-        "id": "email",
-        "value": "email@email.em",   //тоже взять из пользователя
-      },
-    ]
+    "name": "Artemon",
+    "email": "los28.2001@mail.ru",
+    "cost": 1000
   };
 
-  const ticket = await fetch( 'ticket/seat/' + seatJSON.seatNumber,{
+  const ticket = await fetch( '/ticket/seat/' + seatJSON.seatNumber,{
     method: 'POST',
     headers: {
       "Accept": "application/json",
@@ -45,16 +34,14 @@ async function buyTicketT1() {  //T1 mean that tribune is # 1
   })
   const ticketJSON = await ticket.json();
 
-  fetch(user.id + '/ticket/' + ticketJSON.id,{
-    method: 'PUT'
-  })
+  // fetch(user.id + '/ticket/' + ticketJSON.id,{   это будет, когда пользователи будут KEKW
+  //   method: 'PUT'
+  // })
 
-  fetch('/reserve/' + seatJSON.seatNumber, {
+  fetch('/seat/' + seatJSON.seatNumber + '/reserve/', {
     method: 'PUT',
   })
-
-
-
+  window.location.href = "/";
 }
 
 async function signUp() {

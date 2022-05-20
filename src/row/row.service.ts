@@ -60,6 +60,9 @@ export class RowService {
     const seats: Seat[] = await this.prisma.row.findUnique({
       where: sectorWhereUniqueInput,
     }).seats()
+    seats.sort(function(a, b){
+      return (Number(b.seatNumber < a.seatNumber)) - (Number(a.seatNumber < b.seatNumber));
+    });
     return seats[seatId - 1];
   }
 }
