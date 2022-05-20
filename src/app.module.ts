@@ -22,8 +22,8 @@ import { EventsGateway } from "./events/events.gateway";
       appInfo: {
         // Learn more about this on https://supertokens.com/docs/emailpassword/appinfo
         appName: "artemonweb2",
-        apiDomain: "http://localhost:12345/",
-        websiteDomain: "http://localhost:12345/",
+        apiDomain: "https://artemonweb2.herokuapp.com/",
+        websiteDomain: "https://artemonweb2.herokuapp.com/",
       },
     }),
   ],

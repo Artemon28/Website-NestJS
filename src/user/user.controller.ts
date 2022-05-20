@@ -3,7 +3,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { User } from '@prisma/client'
 import { Ticket } from '@prisma/client'
 import { UserService } from "./user.service";
-import { ApiCookieAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiCookieAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { AuthGuard } from "../auth/auth.guard";
 import { SessionContainer } from "supertokens-node/recipe/session";
 

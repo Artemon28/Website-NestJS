@@ -2,6 +2,7 @@ var startTime = (function getSpeedInfo(){
     return Date.now();
 })();
 
+
 window.onload = function speedTimeandLocation(){
     //IIFE variant
     var speedInfo = document.getElementById("SpeedTest");
