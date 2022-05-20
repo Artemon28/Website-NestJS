@@ -35,6 +35,8 @@ export class UserController {
   }
 
 
+  @ApiCookieAuth()
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Get user'
   })
@@ -79,6 +81,8 @@ export class UserController {
   };
 
 
+  @ApiCookieAuth()
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'User buying ticket'
   })
@@ -100,6 +104,8 @@ export class UserController {
   }
 
 
+  @ApiCookieAuth()
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary: 'Delete this user'
   })

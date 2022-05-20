@@ -43,7 +43,7 @@
               </div>
             </div>
             <br>
-            <textarea id="textarea" class="form-control" v-model="text" placeholder="Enter message..."></textarea>
+            <textarea id="textarea" class="form-control" v-model="text" v-on:keydown.ctrl.enter="sendMessage" placeholder="Enter message..."></textarea>
             <br>
             <button id="send" class="btn" @click.prevent="sendMessage">Send</button>
           </div>

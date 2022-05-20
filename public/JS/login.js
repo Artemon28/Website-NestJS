@@ -103,7 +103,7 @@ async function signIn() {
 
     let userEmail = await response.json();
 
-    if (!userEmail.email) {
+    if (!userEmail.user.email) {
       throw new Error(`Wrong login or password, error: ${userEmail.status}`);
     }
 
