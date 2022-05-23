@@ -40,7 +40,7 @@ export class UserService {
   }
 
 
-  async addUserName(userWhereUniqueInput: Prisma.UserWhereUniqueInput, dto: UpdateUserDto): Promise<User> {
+  public addName(userWhereUniqueInput: Prisma.UserWhereUniqueInput, dto: UpdateUserDto): Promise<User> {
     return this.prisma.user.update({
       where: userWhereUniqueInput,
       data: dto,

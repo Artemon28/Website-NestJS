@@ -74,7 +74,7 @@ export class UserController {
   @Roles('AuthUser')
   @Put(':id')
   public addUserName(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
-    return this.userService.addUserName({ id }, updateUserDto);
+    return this.userService.addName({ id }, updateUserDto);
   }
 
   @ApiOperation({
